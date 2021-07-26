@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function PlayerMenu(props) {
   const elementExplanation = false
+
+  console.log("playermenu props", props)
   return (
     <div className="action-menu">
       <p><strong>Name:{props.player.playerName} </strong></p>
@@ -19,12 +21,12 @@ export default function PlayerMenu(props) {
       <button className="action-button" onClick={() => {
         props.performAction({
           attacker: props.player.playerName,
-          defender: props.player.target,
+          target: props.player.target,
           action: "attack",
           impact: props.player.strength
         })
       }}>Attack</button>
-      <button className="action-button" onClick={() => {
+      {/* <button className="action-button" onClick={() => {
         props.performAction({
           attacker: props.player.playerName,
           defender: props.player.target,
@@ -48,7 +50,7 @@ export default function PlayerMenu(props) {
           impact: "full hp"
         })
       }}>Use Item</button>
-
+ */}
     </div>
   )
 }
