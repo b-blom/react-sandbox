@@ -1,0 +1,28 @@
+.App-header {
+  width: 100%
+}
+
+.action-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(79, 36, 128);
+
+  justify-content: space-around;  
+  border: 1px solid blue;
+  padding: 5%;
+
+
+  text-align: start;
+}
+
+.action-menu > p {
+  margin: 0;
+  
+}
+
+.action-menu > span {
+  text-align: end;
+  margin-right: 5%;
+}
+
+

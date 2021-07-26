@@ -11,9 +11,9 @@ export default function Bot() {
   const [payload, setpayload] = useState({ payload: {} });
   const headless = false; // variable that decide if Bot should render to front end. Headless means no GUI.
 
-  useEffect(() => {
+  /* useEffect(() => {
     props.botToNetMessage(textInput);
-  });
+  }); */
   // put harvest functions here
 
   // put send functions here

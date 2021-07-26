@@ -1,0 +1,18 @@
+.game-wrapper{
+  background-color: rgb(109, 99, 99);
+  width: 100%;
+}
+
+.play-field {
+  border-top: 3px solid red;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.board-element {
+  width: 30%px;
+  border: 10px solid green;
+  padding: 20px
+}
