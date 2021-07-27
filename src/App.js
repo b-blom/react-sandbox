@@ -5,8 +5,8 @@ import Game from './game/Game';
 function App() {
   return (
     <div className='App'>
+      <Game />
       <header className='App-header'>
-        <Game />
       </header>
     </div>
   );

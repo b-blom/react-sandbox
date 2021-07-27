@@ -1,0 +1,43 @@
+.playfield-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.mana-wrapper {
+  width: 10%;
+}
+
+.mana-card{
+  width: 70px;
+}
+.playing-card{
+  margin: 3px;
+  border: 2px solid gold;
+  border-radius: 5%;
+  background-color: silver;
+}
+
+.mana-card > h6 {
+  margin: 4px;
+}
+.mana-card > p {
+  margin:0px;
+  font-size: 8px;
+}
+
+.mana-color {
+  width: 100%;
+  height: 35px;
+  margin-top: 17px;
+  margin-bottom: 17px;
+  background-color: firebrick;
+}
+
+.small-font{
+  font-size: 8px;
+}
+
+.creature-card {
+
+}
