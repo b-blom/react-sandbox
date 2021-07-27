@@ -21,14 +21,31 @@ export default function Game() {
 
   const [creatureDeck, setcreatureDeck] = useState([{
     creatureName: "drone",
-    attack: 1,
+    creatureImage: "✈",
+    strength: 1,
     health: 1,
     abilities: [{
       abilityName: "fly",
-      abilityFeature: "Creature gains 'flying' until end of turn"
+      abilityFeature: "Creature gains 'flying' until end of turn",
+      abilityCost: "1 any"
     }, {
       abilityName: "kamikaze",
-      abilityFeature: "Sacrafice creature, deals damage equal to attack + health, draw a card."
+      abilityFeature: "Sacrafice creature, deals damage equal to strength + health, draw a card.",
+      abilityCost: "3 any",
+    }]
+  }, {
+    creatureName: "cat",
+    creatureImage: "🐈",
+    strength: 1,
+    health: 1,
+    abilities: [{
+      abilityName: "charm",
+      abilityFeature: "All oponents must choose one phase to skip: pre battle, battle or post battle.",
+      abilityCost: "1 any"
+    }, {
+      abilityName: "nine lives",
+      abilityFeature: "Return creature to players hand, draw a card and summon one creature with haste to the battlefield.",
+      abilityCost: "3 any",
     }]
   }]);
 
@@ -44,7 +61,7 @@ export default function Game() {
             );
           })}
         </div>
-        <div className="board-element action-board">
+        <div className="creature-wrapper">
           {actionMessage != null &&
             <ActionMessage message={actionMessage}
               clear={() => { setactionMessage(null); }} />
