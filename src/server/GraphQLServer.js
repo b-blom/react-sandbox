@@ -10,6 +10,10 @@ var fakeDatabase = {
 
 // A query to fetch the name and age of user with id "a"
 /* 
+
+theory:
+user refers to queryType.fields.user
+(id: "a") refers to an arg defined as det key
 {
   user(id: "a")
   {

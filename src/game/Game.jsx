@@ -19,8 +19,7 @@ export default function Game() {
     { cardType: "resource", manaType: "fire" },
     { cardType: "resource", manaType: "fire" },
     { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" }
+
   ]);
 
   const [instantsDeck, setinstantsDeck] = useState([
@@ -73,43 +72,28 @@ export default function Game() {
     <div className="game-wrapper">
       <p>Proxy the gathering</p>
       <div className="player-wrapper">
-        <Player playerName="player1" />
-        <Player playerName="player2" />
+        <Player
+          playerName="player1"
+          manaDeck={manaDeck}
+          instantsDeck={instantsDeck}
+          sorceryDeck={sorceryDeck}
+          creatureDeck={creatureDeck}
+        />
+        <Player
+          playerName="player2"
+          manaDeck={manaDeck}
+          instantsDeck={instantsDeck}
+          sorceryDeck={sorceryDeck}
+          creatureDeck={creatureDeck}
+        />
       </div>
-
       <div className="playfield-wrapper">
-        <div className="player-card-wrapper">
-
-          <div className="mana-wrapper">
-            {manaDeck.map((card, index) => {
-              return (
-                <ManaCard id={index} card={card} />
-              );
-            })}
-          </div>
-          <div className="support-cards-wrapper">
-            <div className="instants-wrapper">
-              {instantsDeck && instantsDeck.map((card, index) => {
-                return (<InstantCard card={card} id={index} />);
-              })}
-            </div>
-            <div className="sorcery-wrapper">
-              {sorceryDeck && sorceryDeck.map((card, index) => {
-                return (<SorceryCard card={card} id={index} />);
-              })}
-            </div>
-          </div>
-          <div className="creature-wrapper">
-            {actionMessage != null &&
-              <ActionMessage message={actionMessage}
-                clear={() => { setactionMessage(null); }} />
-            }
-            {creatureDeck && creatureDeck.map((card, index) => {
-              return (<CreatureCard card={card} id={index} />);
-            })}
-          </div>
-        </div >
+        {actionMessage != null &&
+          <ActionMessage message={actionMessage}
+            clear={() => { setactionMessage(null); }} />
+        }
       </div>
-    </div>
+    </div >
+
   );
 }

@@ -1,3 +1,11 @@
+.row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  
+}
+
 .game-wrapper{
   background-color: rgb(109, 99, 99);
   width: 100%;
