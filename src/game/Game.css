@@ -2,6 +2,25 @@
   background-color: rgb(109, 99, 99);
   width: 100%;
 }
+
+.player-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.player-card-wrapper{
+  width: 50%;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+}
+
+.player{
+  width: 50%;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  margin: 5px;
+}
+
 .play-field-wrapper{
   display: flex;
   flex-direction: column;

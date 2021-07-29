@@ -5,16 +5,48 @@
 }
 
 .mana-wrapper {
-  width: 10%;
+ 
   border: 2px solid black;
   border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .creature-wrapper{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 90%;
   border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.support-cards-wrapper{
+  display: flex;
+  flex-direction: row;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.instants-wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 30%;
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sorcery-wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 30%;
+  border: 2px solid gray;
   border-radius: 10px;
   padding: 10px;
 }
@@ -55,9 +87,9 @@
   margin: 2px 0px;
 }
 
-.small-font > p {
+.instant-card {
+  width: 70px
 }
-
 
 .creature-card {
 width: 120px;
