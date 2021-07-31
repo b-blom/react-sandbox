@@ -6,6 +6,8 @@ import CreatureCard from '../cards/CreatureCard';
 
 export default function Player(props) {
   const [playerHp, setplayerHp] = useState(20);
+  const [activeCard, setActiveCard] = useState(null);
+
 
   if (playerHp <= 0) {
     return (
@@ -46,10 +48,15 @@ export default function Player(props) {
         </div>
       </div>
       <div className="creature-wrapper">
-
-        {props.creatureDeck && props.creatureDeck.map((card, index) => {
-          return (<CreatureCard card={card} id={index} />);
-        })}
+        {
+          props.creatureDeck && props.creatureDeck.map((card, index) => {
+            return (
+              <CreatureCard
+                card={card}
+                id={index}
+              />);
+          })
+        }
       </div>
     </div>
   );

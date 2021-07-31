@@ -13,19 +13,17 @@ export default function Game() {
   const [actionMessage, setactionMessage] = useState(null);
 
   const [manaDeck, setmanaDeck] = useState([
-    { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" },
-    { cardType: "resource", manaType: "fire" },
-
+    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
+    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
+    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
+    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
   ]);
 
   const [instantsDeck, setinstantsDeck] = useState([
     {
       instantName: "lightning bolt",
       instantDescription: "Deal 3 damage to target creature or target player",
+      instantImage: "⚡",
       instantCost: "1 fire"
     }
   ]);
@@ -33,7 +31,7 @@ export default function Game() {
   const [sorceryDeck, setsorceryDeck] = useState([{
     sorceryName: "bless",
     sorceryDescription: "Raise strength with 100%",
-    sorceryImage: "image",
+    sorceryImage: "🍾",
     sorcreyCost: "1 any"
   }]);
 
@@ -78,6 +76,7 @@ export default function Game() {
           instantsDeck={instantsDeck}
           sorceryDeck={sorceryDeck}
           creatureDeck={creatureDeck}
+
         />
         <Player
           playerName="player2"

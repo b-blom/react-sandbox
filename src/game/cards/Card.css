@@ -5,19 +5,18 @@
 }
 
 .mana-wrapper {
- 
   border: 2px solid black;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 10px;
 }
 
 .creature-wrapper{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 90%;
   border: 2px solid black;
   border-radius: 10px;
   padding: 10px;
@@ -76,10 +75,13 @@
 
 .mana-color {
   width: 100%;
-  height: 35px;
-  margin-top: 17px;
-  margin-bottom: 17px;
-  background-color: firebrick;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: black;
+}
+.mana-image{
+  margin: 0 auto;
+
 }
 
 .small-font{
@@ -87,13 +89,10 @@
   margin: 2px 0px;
 }
 
-.instant-card {
-  width: 70px
-}
+
 
 .creature-card {
 width: 120px;
-height: 250px;
 }
 
 .creature-image{
@@ -102,6 +101,12 @@ height: 250px;
 }
 
 .ability-button{
+  border: 1px dotted gray;
+  margin: 5px;
+  padding: 5px;
+}
+
+.utility-button{
   border: 1px dotted gray;
   margin: 5px;
   padding: 5px;

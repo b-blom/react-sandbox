@@ -3,7 +3,7 @@ import "./Card.css";
 
 export default function InstantCard(props) {
   return (
-    <div className="playing-card instant-card">
+    <div className="playing-card">
       <h6>{props.card.instantName}</h6>
       <div className="creature-image">
         {props.card.instantImage}

@@ -7,7 +7,9 @@ export default function ManaCard(props) {
     <div className="mana-card playing-card">
       <h6>Mana</h6>
       <div className="mana-color">
-        <p style={{ color: "white" }}>{props.card.manaType}</p>
+        <div className="mana-image">
+          {props.card.manaImage}
+        </div>
       </div>
     </div>
   );
