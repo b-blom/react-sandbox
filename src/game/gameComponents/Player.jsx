@@ -5,11 +5,8 @@ import SorceryCard from '../cards/SorceryCard';
 import CreatureCard from '../cards/CreatureCard';
 
 export default function Player(props) {
-  const [playerHp, setplayerHp] = useState(20);
-  const [activeCard, setActiveCard] = useState(null);
 
-
-  if (playerHp <= 0) {
+  if (props.playerHp <= 0) {
     return (
       <div className="player">
         <p>{props.playerName} is dead</p>
@@ -21,11 +18,11 @@ export default function Player(props) {
     <div className="player">
       <div className="row">
         <p>{props.playerName}</p>
-        <p>{playerHp}</p>
+        <p>{props.playerHp}</p>
 
         <div className="health-adjust-wrapper ">
-          <button onClick={() => { setplayerHp(playerHp - 1); }} >-</button>
-          <button onClick={() => { setplayerHp(playerHp + 1); }}>+</button>
+          <button onClick={() => { props.setPlayerHp(props.playerHp - 1); }} >-</button>
+          <button onClick={() => { props.setPlayerHp(props.playerHp + 1); }}>+</button>
         </div>
       </div>
       <div className="mana-wrapper">
@@ -35,15 +32,24 @@ export default function Player(props) {
           );
         })}
       </div>
-      <div className="support-cards-wrapper">
-        <div className="instants-wrapper">
+      <div className="support-cards-wrapper column">
+        <div className="support-card-type-wrapper">
           {props.instantsDeck && props.instantsDeck.map((card, index) => {
-            return (<InstantCard card={card} id={index} />);
+            return (<InstantCard
+              id={index}
+              card={card}
+              dealDamage={(damage, manaCost, cardId) => {
+                console.log("player.jsx dealDamage");
+                props.attackOpponent(damage, manaCost, cardId);
+              }}
+            />);
           })}
         </div>
-        <div className="sorcery-wrapper">
+        <div className="support-card-type-wrapper">
           {props.sorceryDeck && props.sorceryDeck.map((card, index) => {
-            return (<SorceryCard card={card} id={index} />);
+            return (<SorceryCard
+              card={card}
+              id={index} />);
           })}
         </div>
       </div>
@@ -52,9 +58,12 @@ export default function Player(props) {
           props.creatureDeck && props.creatureDeck.map((card, index) => {
             return (
               <CreatureCard
+                master={props.playerName}
                 card={card}
                 id={index}
-              />);
+                summonCreature={(card, id) => {
+                  props.summonCreature(card, id);
+                }} />);
           })
         }
       </div>

@@ -10,7 +10,18 @@ export default function CreatureCard(props) {
           {props.card.strength}/{props.card.health}
         </span>
       </h6>
-      <div className="creature-image">{props.card.creatureImage}</div>
+      <div className="card-image">{props.card.creatureImage}</div>
+      {props.summoned ?
+        <button className="utility-button" onClick={() => { props.activeCard("" + props.master + ":" + props.card.creatureName, " attack for " + props.card.strength); }}>Attack</button>
+        :
+        <button className="utility-button" onClick={() => {
+
+          props.summonCreature(props.card, props.id);
+        }
+        } >
+          Summon
+        </button>
+      }
       {big ?
         <button className="utility-button" onClick={() => {
           console.log("hide", props.card.creatureName);
@@ -45,6 +56,7 @@ export default function CreatureCard(props) {
               <p className="small-font">
                 cost: {ability.abilityCost}
               </p>
+              <button onClick={() => { console.log("activateAbility(ability)"); }}>Activate</button>
             </div>
           );
         })

@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
 
-  
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .game-wrapper{
@@ -14,6 +18,12 @@
 .player-wrapper {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.player-playfield {
+  border: 2px dotted red;
 }
 
 .player-card-wrapper{
@@ -23,24 +33,19 @@
 }
 
 .player{
-  width: 50%;
+  width: 20%;
   border: 1px solid gainsboro;
   border-radius: 10px;
   margin: 5px;
 }
 
-.play-field-wrapper{
-  display: flex;
-  flex-direction: column;
-  border-top: 3px solid red;
-}
+.playfield{
+ 
+  width: 55%;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  margin: 5px;}
 
-.play-field {
-  padding-bottom: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .board-element {
   width: 50%;
   border: 2px solid green;

@@ -21,11 +21,26 @@ export default function Game() {
 
   const [instantsDeck, setinstantsDeck] = useState([
     {
-      instantName: "lightning bolt",
+      instantName: "bolt1",
       instantDescription: "Deal 3 damage to target creature or target player",
+      instantDamage: 3,
       instantImage: "⚡",
-      instantCost: "1 fire"
-    }
+      instantCost: 1
+    },
+    {
+      instantName: "bolt2",
+      instantDescription: "Deal 3 damage to target creature or target player",
+      instantDamage: 3,
+      instantImage: "⚡",
+      instantCost: 1
+    },
+    {
+      instantName: "bolt3",
+      instantDescription: "Deal 3 damage to target creature or target player",
+      instantDamage: 3,
+      instantImage: "⚡",
+      instantCost: 1
+    },
   ]);
 
   const [sorceryDeck, setsorceryDeck] = useState([{
@@ -35,7 +50,7 @@ export default function Game() {
     sorcreyCost: "1 any"
   }]);
 
-  const [creatureDeck, setcreatureDeck] = useState([{
+  const [creatureDeck, setCreatureDeck] = useState([{
     creatureName: "drone",
     creatureImage: "✈",
     strength: 1,
@@ -64,35 +79,107 @@ export default function Game() {
       abilityCost: "3 any",
     }]
   }]);
+  const [player1SummonedCreatures, setPlayer1SummonedCreatures] = useState([]);
+  const [player2SummonedCreatures, setPlayer2SummonedCreatures] = useState([]);
+  const [player1Hp, setPlayer1Hp] = useState(20);
+  const [player2Hp, setPlayer2Hp] = useState(20);
+
 
   console.log("actionMessage", actionMessage);
   return (
     <div className="game-wrapper">
       <p>Proxy the gathering</p>
       <div className="player-wrapper">
+
         <Player
           playerName="player1"
+          playerHp={player1Hp}
+          setPlayerHp={(hp) => { setPlayer1Hp(hp); }}
+          attackOpponent={(damage) => { setPlayer2Hp(player2Hp - damage); }}
           manaDeck={manaDeck}
           instantsDeck={instantsDeck}
           sorceryDeck={sorceryDeck}
           creatureDeck={creatureDeck}
-
+          summonCreature={(card, id) => {
+            var newCreatureDeck = [...creatureDeck];
+            newCreatureDeck.slice(id, 1);
+            setCreatureDeck(newCreatureDeck);
+            var newPlayer1SummonedCreatures = [...player1SummonedCreatures];
+            newPlayer1SummonedCreatures.push(card);
+            setPlayer1SummonedCreatures(newPlayer1SummonedCreatures);
+          }}
         />
+
+        <div className="playfield">
+          <h2>Playfield</h2>
+          {actionMessage != null &&
+            <ActionMessage message={actionMessage}
+              clear={() => { setactionMessage(null); }}
+            />
+          }
+          <div className="row">
+            <div className="player-playfield">
+              <p>player one</p>
+              {
+                player1SummonedCreatures && player1SummonedCreatures.map((card, index) => {
+                  return <CreatureCard
+                    card={card}
+                    id={index}
+                    summoned={true}
+                  />;
+                })
+              }
+            </div>
+            <div className="player-playfield">
+              <p>player2</p>
+              {
+                player2SummonedCreatures && player2SummonedCreatures.map((card, index) => {
+                  return <CreatureCard
+                    card={card}
+                    id={index}
+                    summoned={true}
+
+                  />;
+                })
+              }
+            </div>
+          </div>
+        </div>
+
         <Player
           playerName="player2"
+          playerHp={player2Hp}
+          setPlayerHp={(hp) => setPlayer2Hp(hp)}
+          attackOpponent={(damage, manaCost, cardId) => {
+            if (manaDeck.length > 0) {
+              var newManaDeck = [...manaDeck];
+              for (var i = 0; i < manaCost; i++) {
+                newManaDeck.pop();
+              }
+              setmanaDeck(newManaDeck);
+
+              var newInstantsDeck = [...instantsDeck];
+              newInstantsDeck.splice(cardId, 1);
+              setinstantsDeck(newInstantsDeck);
+
+              setPlayer1Hp(player1Hp - damage);
+            }
+          }}
+          summonCreature={(card, id) => {
+            var newCreatureDeck = [...creatureDeck];
+            newCreatureDeck.slice(id, 1);
+            setCreatureDeck(newCreatureDeck);
+
+            var newPlayer2SummonedCreatures = [...player2SummonedCreatures];
+            newPlayer2SummonedCreatures.push(card);
+            setPlayer2SummonedCreatures(newPlayer2SummonedCreatures);
+          }}
           manaDeck={manaDeck}
           instantsDeck={instantsDeck}
           sorceryDeck={sorceryDeck}
           creatureDeck={creatureDeck}
         />
       </div>
-      <div className="playfield-wrapper">
-        {actionMessage != null &&
-          <ActionMessage message={actionMessage}
-            clear={() => { setactionMessage(null); }} />
-        }
-      </div>
     </div >
-
   );
 }
