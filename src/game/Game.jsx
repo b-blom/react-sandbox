@@ -125,6 +125,9 @@ export default function Game() {
                     card={card}
                     id={index}
                     summoned={true}
+                    creatureAttack={(card) => {
+                      setPlayer2Hp(player2Hp - card.strength);
+                    }}
                   />;
                 })
               }
@@ -137,6 +140,9 @@ export default function Game() {
                     card={card}
                     id={index}
                     summoned={true}
+                    creatureAttack={(card) => {
+                      setPlayer1Hp(player1Hp - card.strength);
+                    }}
                   />;
                 })
               }
@@ -146,6 +152,10 @@ export default function Game() {
 
         <Player
           playerName="player2"
+          manaDeck={manaDeck}
+          instantsDeck={instantsDeck}
+          sorceryDeck={sorceryDeck}
+          creatureDeck={creatureDeck}
           playerHp={player2Hp}
           setPlayerHp={(hp) => setPlayer2Hp(hp)}
           attackOpponent={(damage, manaCost, cardId) => {
@@ -170,10 +180,6 @@ export default function Game() {
             newPlayer2SummonedCreatures.push(card);
             setPlayer2SummonedCreatures(newPlayer2SummonedCreatures);
           }}
-          manaDeck={manaDeck}
-          instantsDeck={instantsDeck}
-          sorceryDeck={sorceryDeck}
-          creatureDeck={creatureDeck}
         />
       </div>
     </div >

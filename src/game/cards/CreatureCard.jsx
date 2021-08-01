@@ -12,13 +12,13 @@ export default function CreatureCard(props) {
       </h6>
       <div className="card-image">{props.card.creatureImage}</div>
       {props.summoned ?
-        <button className="utility-button" onClick={() => { props.activeCard("" + props.master + ":" + props.card.creatureName, " attack for " + props.card.strength); }}>Attack</button>
+        <button className="utility-button" onClick={() => props.creatureAttack(props.card)}>Attack</button>
         :
-        <button className="utility-button" onClick={() => {
-
-          props.summonCreature(props.card, props.id);
-        }
-        } >
+        <button className="utility-button"
+          onClick={() => {
+            props.summonCreature(props.card, props.id);
+          }
+          } >
           Summon
         </button>
       }

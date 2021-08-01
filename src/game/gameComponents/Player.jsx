@@ -42,7 +42,11 @@ export default function Player(props) {
                 id={index}
                 summonCreature={(card, cardId) => {
                   props.summonCreature(card, cardId);
-                }} />);
+                }}
+                creatureAttack={(card) => {
+                  props.creatureAttack(card);
+                }}
+              />);
           })
         }
       </div>
