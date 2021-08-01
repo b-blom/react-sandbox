@@ -84,7 +84,6 @@ export default function Game() {
   const [player1Hp, setPlayer1Hp] = useState(20);
   const [player2Hp, setPlayer2Hp] = useState(20);
 
-
   console.log("actionMessage", actionMessage);
   return (
     <div className="game-wrapper">
@@ -119,7 +118,7 @@ export default function Game() {
           }
           <div className="row">
             <div className="player-playfield">
-              <p>player one</p>
+              <p>player 1</p>
               {
                 player1SummonedCreatures && player1SummonedCreatures.map((card, index) => {
                   return <CreatureCard
@@ -131,14 +130,13 @@ export default function Game() {
               }
             </div>
             <div className="player-playfield">
-              <p>player2</p>
+              <p>player 2</p>
               {
                 player2SummonedCreatures && player2SummonedCreatures.map((card, index) => {
                   return <CreatureCard
                     card={card}
                     id={index}
                     summoned={true}
-
                   />;
                 })
               }
@@ -157,17 +155,15 @@ export default function Game() {
                 newManaDeck.pop();
               }
               setmanaDeck(newManaDeck);
-
               var newInstantsDeck = [...instantsDeck];
               newInstantsDeck.splice(cardId, 1);
               setinstantsDeck(newInstantsDeck);
-
               setPlayer1Hp(player1Hp - damage);
             }
           }}
-          summonCreature={(card, id) => {
+          summonCreature={(card, cardId) => {
             var newCreatureDeck = [...creatureDeck];
-            newCreatureDeck.slice(id, 1);
+            newCreatureDeck.splice(cardId, 1);
             setCreatureDeck(newCreatureDeck);
 
             var newPlayer2SummonedCreatures = [...player2SummonedCreatures];

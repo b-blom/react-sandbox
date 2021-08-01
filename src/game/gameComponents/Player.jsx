@@ -32,6 +32,20 @@ export default function Player(props) {
           );
         })}
       </div>
+      <div className="creature-wrapper">
+        {
+          props.creatureDeck && props.creatureDeck.map((card, index) => {
+            return (
+              <CreatureCard
+                master={props.playerName}
+                card={card}
+                id={index}
+                summonCreature={(card, cardId) => {
+                  props.summonCreature(card, cardId);
+                }} />);
+          })
+        }
+      </div>
       <div className="support-cards-wrapper column">
         <div className="support-card-type-wrapper">
           {props.instantsDeck && props.instantsDeck.map((card, index) => {
@@ -40,6 +54,7 @@ export default function Player(props) {
               card={card}
               dealDamage={(damage, manaCost, cardId) => {
                 console.log("player.jsx dealDamage");
+
                 props.attackOpponent(damage, manaCost, cardId);
               }}
             />);
@@ -52,20 +67,6 @@ export default function Player(props) {
               id={index} />);
           })}
         </div>
-      </div>
-      <div className="creature-wrapper">
-        {
-          props.creatureDeck && props.creatureDeck.map((card, index) => {
-            return (
-              <CreatureCard
-                master={props.playerName}
-                card={card}
-                id={index}
-                summonCreature={(card, id) => {
-                  props.summonCreature(card, id);
-                }} />);
-          })
-        }
       </div>
     </div>
   );
