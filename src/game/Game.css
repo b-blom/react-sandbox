@@ -23,7 +23,8 @@
 }
 
 .player-playfield {
-  border: 2px dotted red;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
 }
 
 .player-card-wrapper{

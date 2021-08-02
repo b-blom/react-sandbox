@@ -16,7 +16,8 @@ export default function InstantCard(props) {
       {showMenu &&
         <div className="ability-button" onClick={() => {
           console.log(`cast  ${props.card.instantName} for ${props.card.instantDamage} damage`);
-          props.dealDamage(props.card.instantDamage, props.card.instantCost, props.id);
+          props.dealDamage(props.card.instantCost, props.card.instantDamage, props.id);
+          setShowMenu(false);
         }}>
           <p className="small-font">
             {props.card.instantDescription}

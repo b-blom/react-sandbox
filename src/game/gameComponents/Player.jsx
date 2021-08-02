@@ -56,10 +56,10 @@ export default function Player(props) {
             return (<InstantCard
               id={index}
               card={card}
-              dealDamage={(damage, manaCost, cardId) => {
+              dealDamage={(manaCost, damage, cardId) => {
                 console.log("player.jsx dealDamage");
 
-                props.attackOpponent(damage, manaCost, cardId);
+                props.attackWithInstant(props.playerName, manaCost, damage, cardId);
               }}
             />);
           })}

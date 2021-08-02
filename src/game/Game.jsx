@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import Player from './gameComponents/Player';
 import ActionMessage from "./gameComponents/ActionMessage";
-import ManaCard from './cards/ManaCard';
 import CreatureCard from "./cards/CreatureCard";
-import InstantCard from './cards/InstantCard';
-import SorceryCard from './cards/SorceryCard';
+
 import "./Game.css";
 
 export default function Game() {
@@ -79,10 +77,78 @@ export default function Game() {
       abilityCost: "3 any",
     }]
   }]);
-  const [player1SummonedCreatures, setPlayer1SummonedCreatures] = useState([]);
-  const [player2SummonedCreatures, setPlayer2SummonedCreatures] = useState([]);
+
   const [player1Hp, setPlayer1Hp] = useState(20);
+  const [player1CreatureDeck, setPlayer1CreatureDeck] = useState(creatureDeck);
+  const [player1ManaDeck, setPlayer1ManaDeck] = useState(manaDeck);
+  const [player1InstantDeck, setPlayer1InstantDeck] = useState(instantsDeck);
+  const [player1SorceryDeck, setPlayer1SorceryDeck] = useState(sorceryDeck);
+  const [player1SummonedCreatures, setPlayer1SummonedCreatures] = useState([]);
+
   const [player2Hp, setPlayer2Hp] = useState(20);
+  const [player2CreatureDeck, setPlayer2CreatureDeck] = useState(creatureDeck);
+  const [player2ManaDeck, setPlayer2ManaDeck] = useState(manaDeck);
+  const [player2InstantDeck, setPlayer2InstantDeck] = useState(instantsDeck);
+  const [player2SorceryDeck, setPlayer2SorceryDeck] = useState(sorceryDeck);
+  const [player2SummonedCreatures, setPlayer2SummonedCreatures] = useState([]);
+
+  // helper functions
+  const spendMana = (player, manaCost) => {
+    var newManaDeck = [];
+    if (player === "player1") {
+      newManaDeck = [...player1ManaDeck];
+    }
+    if (player === "player2") {
+      newManaDeck = [...player2ManaDeck];
+    }
+    if (newManaDeck.Length < manaCost) {
+      setactionMessage(`${player} has not enough mana`);
+      return false;
+    };
+
+    for (var i = 0; i < manaCost; i++) {
+      newManaDeck.pop();
+    }
+    if (player === "player1") {
+      setPlayer1ManaDeck(newManaDeck);
+    }
+    if (player === "player2") {
+      setPlayer2ManaDeck(newManaDeck);
+    }
+    return true;
+  };
+
+  const dealDamage = (player, damage) => {
+    if (player === "player1") { setPlayer2Hp(player2Hp - damage); }
+    if (player === "player2") { setPlayer1Hp(player1Hp - damage); }
+  };
+
+  const removeUsedInstantCard = (player, cardId) => {
+    var newInstantsDeck = [];
+    if (player === "player1") {
+      newInstantsDeck = [...player1InstantDeck];
+    }
+    if (player === "player2") {
+      newInstantsDeck = [...player2InstantDeck];
+    }
+
+    newInstantsDeck.splice(cardId, 1);
+
+    if (player === "player1") {
+      setPlayer1InstantDeck(newInstantsDeck);
+    }
+    if (player === "player2") {
+      setPlayer2InstantDeck(newInstantsDeck);
+    }
+  };
+  // /helper functions
+
+  function useInstantCard(player, manaCost, damage, cardId) {
+    if (!spendMana(player, manaCost)) { return; };
+    dealDamage(player, damage);
+    removeUsedInstantCard(player, cardId);
+  };
+
 
   console.log("actionMessage", actionMessage);
   return (
@@ -93,12 +159,17 @@ export default function Game() {
         <Player
           playerName="player1"
           playerHp={player1Hp}
+          manaDeck={player1ManaDeck}
+          instantsDeck={player1InstantDeck}
+          sorceryDeck={player1SorceryDeck}
+          creatureDeck={player1CreatureDeck}
           setPlayerHp={(hp) => { setPlayer1Hp(hp); }}
-          attackOpponent={(damage) => { setPlayer2Hp(player2Hp - damage); }}
-          manaDeck={manaDeck}
-          instantsDeck={instantsDeck}
-          sorceryDeck={sorceryDeck}
-          creatureDeck={creatureDeck}
+
+          attackWithInstant={(player, manaCost, damage, cardId) => {
+            if (!spendMana(player, manaCost)) { return; };
+            dealDamage(player, damage);
+            removeUsedInstantCard(player, cardId);
+          }}
           summonCreature={(card, id) => {
             var newCreatureDeck = [...creatureDeck];
             newCreatureDeck.slice(id, 1);
@@ -152,13 +223,13 @@ export default function Game() {
 
         <Player
           playerName="player2"
-          manaDeck={manaDeck}
-          instantsDeck={instantsDeck}
-          sorceryDeck={sorceryDeck}
-          creatureDeck={creatureDeck}
           playerHp={player2Hp}
+          manaDeck={player2ManaDeck}
+          instantsDeck={player2InstantDeck}
+          sorceryDeck={player2SorceryDeck}
+          creatureDeck={player2CreatureDeck}
           setPlayerHp={(hp) => setPlayer2Hp(hp)}
-          attackOpponent={(damage, manaCost, cardId) => {
+          attackWithInstant={(damage, manaCost, cardId) => {
             if (manaDeck.length > 0) {
               var newManaDeck = [...manaDeck];
               for (var i = 0; i < manaCost; i++) {
