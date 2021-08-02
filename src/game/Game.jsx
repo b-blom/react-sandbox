@@ -141,6 +141,33 @@ export default function Game() {
       setPlayer2InstantDeck(newInstantsDeck);
     }
   };
+
+  const summonCreature = (player, card, cardId) => {
+    console.log("summonCreature", player, cardId);
+    var newCreatureDeck = [];
+    var newSummonedCreatureDeck = [];
+    if (player === "player1") {
+      newCreatureDeck = [...player1CreatureDeck];
+      newSummonedCreatureDeck = [...player1SummonedCreatures];
+    }
+    if (player === "player2") {
+      newCreatureDeck = [...player2CreatureDeck];
+      newSummonedCreatureDeck = [...player2SummonedCreatures];
+    }
+
+    newCreatureDeck.splice(cardId, 1);
+    newSummonedCreatureDeck.push(card);
+
+    if (player === "player1") {
+      setPlayer1CreatureDeck(newCreatureDeck);
+      setPlayer1SummonedCreatures(newSummonedCreatureDeck);
+    }
+    if (player === "player2") {
+      setPlayer2CreatureDeck(newCreatureDeck);
+      setPlayer2SummonedCreatures(newSummonedCreatureDeck);
+    }
+  };
+
   // /helper functions
 
   function useInstantCard(player, manaCost, damage, cardId) {
@@ -170,13 +197,8 @@ export default function Game() {
             dealDamage(player, damage);
             removeUsedInstantCard(player, cardId);
           }}
-          summonCreature={(card, id) => {
-            var newCreatureDeck = [...creatureDeck];
-            newCreatureDeck.slice(id, 1);
-            setCreatureDeck(newCreatureDeck);
-            var newPlayer1SummonedCreatures = [...player1SummonedCreatures];
-            newPlayer1SummonedCreatures.push(card);
-            setPlayer1SummonedCreatures(newPlayer1SummonedCreatures);
+          summonCreature={(player, cardId) => {
+            summonCreature(player, cardId);
           }}
         />
 

@@ -41,7 +41,7 @@ export default function Player(props) {
                 card={card}
                 id={index}
                 summonCreature={(card, cardId) => {
-                  props.summonCreature(card, cardId);
+                  props.summonCreature(props.playerName, card, cardId);
                 }}
                 creatureAttack={(card) => {
                   props.creatureAttack(card);
