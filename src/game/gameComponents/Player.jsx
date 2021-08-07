@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ManaCard from '../cards/ManaCard';
 import InstantCard from '../cards/InstantCard';
 import SorceryCard from '../cards/SorceryCard';
 import CreatureCard from '../cards/CreatureCard';
+import { SelectedSorceryCardContext } from '../../context/SorceryContext';
 
 export default function Player(props) {
+
+  const { msg, setMsg } = useContext(SelectedSorceryCardContext);
+
+  const [selectedSorceryCard, setSelectedSorceryCard] = useState(SelectedSorceryCardContext);
 
   if (props.playerHp <= 0) {
     return (
@@ -16,13 +21,18 @@ export default function Player(props) {
 
   return (
     <div className="player">
+      <h3>{msg}</h3>
+      <button onClick={() => { setMsg("a new message"); }}>change context</button>
       <div className="row">
         <p>{props.playerName}</p>
         <p>{props.playerHp}</p>
-
         <div className="health-adjust-wrapper ">
-          <button onClick={() => { props.setPlayerHp(props.playerHp - 1); }} >-</button>
-          <button onClick={() => { props.setPlayerHp(props.playerHp + 1); }}>+</button>
+          <button onClick={() => { props.setPlayerHp(props.playerHp - 1); }}>
+            -
+          </button>
+          <button onClick={() => { props.setPlayerHp(props.playerHp + 1); }}>
+            +
+          </button>
         </div>
       </div>
       <div className="mana-wrapper">
@@ -68,7 +78,8 @@ export default function Player(props) {
           {props.sorceryDeck && props.sorceryDeck.map((card, index) => {
             return (<SorceryCard
               card={card}
-              id={index} />);
+              id={index}
+            />);
           })}
         </div>
       </div>

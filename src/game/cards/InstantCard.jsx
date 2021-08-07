@@ -8,7 +8,6 @@ export default function InstantCard(props) {
     <div className="playing-card support-card">
       <button className="card-button" onClick={() => { showMenu ? setShowMenu(false) : setShowMenu(true); }}>
         <h6>{props.card.instantName}</h6>
-        <p>index: {props.id}</p>
         <div className="card-image">
           {props.card.instantImage}
         </div>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Player from './gameComponents/Player';
 import ActionMessage from "./gameComponents/ActionMessage";
 import CreatureCard from "./cards/CreatureCard";
-
 import "./Game.css";
+import SorceryCard from './cards/SorceryCard';
+import { SelectedSorceryCardContext } from '../context/SorceryContext';
 
 export default function Game() {
 
@@ -11,10 +12,11 @@ export default function Game() {
   const [actionMessage, setactionMessage] = useState(null);
 
   const [manaDeck, setmanaDeck] = useState([
-    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
-    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
-    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
-    { cardType: "resource", manaImage: "🔥", manaType: "fire" },
+    { manaImage: "🔥", manaType: "fire" },
+    { manaImage: "🔥", manaType: "fire" },
+    { manaImage: "🔥", manaType: "fire" },
+    { manaImage: "🔥", manaType: "fire" },
+    { manaImage: "🔥", manaType: "fire" },
   ]);
 
   const [instantsDeck, setinstantsDeck] = useState([
@@ -39,20 +41,28 @@ export default function Game() {
       instantImage: "⚡",
       instantCost: 1
     },
+    {
+      instantName: "instant death",
+      instantDescription: "Deal over 9000 damage to target creature or player",
+      instantDamage: 9001,
+      instantImage: "💀",
+      instantCost: 10
+    },
   ]);
 
   const [sorceryDeck, setsorceryDeck] = useState([{
     sorceryName: "bless",
     sorceryDescription: "Raise strength with 100%",
     sorceryImage: "🍾",
-    sorcreyCost: "1 any"
+    sorcreyCost: 1
   }]);
 
   const [creatureDeck, setCreatureDeck] = useState([{
     creatureName: "drone",
-    creatureImage: "✈",
+    creatureImage: "🚁",
     strength: 1,
     health: 1,
+    creatureStatus: [],
     abilities: [{
       abilityName: "fly",
       abilityFeature: "Creature gains 'flying' until end of turn",
@@ -67,6 +77,7 @@ export default function Game() {
     creatureImage: "🐈",
     strength: 1,
     health: 1,
+    creatureStatus: [{ statusName: "bless", statusImage: "🍾" }],
     abilities: [{
       abilityName: "charm",
       abilityFeature: "All oponents must choose one phase to skip: pre battle, battle or post battle.",
@@ -101,10 +112,11 @@ export default function Game() {
     if (player === "player2") {
       newManaDeck = [...player2ManaDeck];
     }
-    if (newManaDeck.Length < manaCost) {
+
+    if (manaCost > newManaDeck.length) {
       setactionMessage(`${player} has not enough mana`);
       return false;
-    };
+    }
 
     for (var i = 0; i < manaCost; i++) {
       newManaDeck.pop();
@@ -115,6 +127,8 @@ export default function Game() {
     if (player === "player2") {
       setPlayer2ManaDeck(newManaDeck);
     }
+    console.log(player1ManaDeck);
+
     return true;
   };
 
@@ -168,113 +182,109 @@ export default function Game() {
     }
   };
 
-  // /helper functions
-
-  function useInstantCard(player, manaCost, damage, cardId) {
-    if (!spendMana(player, manaCost)) { return; };
-    dealDamage(player, damage);
-    removeUsedInstantCard(player, cardId);
-  };
-
-
-  console.log("actionMessage", actionMessage);
+  const [msg, setMsg] = useState("put card here");
   return (
-    <div className="game-wrapper">
-      <p>Proxy the gathering</p>
-      <div className="player-wrapper">
+    <SelectedSorceryCardContext.Provider value={{ msg, setMsg }}>
+      <div className="game-wrapper">
+        <p>Proxy the gathering</p>
+        <div className="player-wrapper">
 
-        <Player
-          playerName="player1"
-          playerHp={player1Hp}
-          manaDeck={player1ManaDeck}
-          instantsDeck={player1InstantDeck}
-          sorceryDeck={player1SorceryDeck}
-          creatureDeck={player1CreatureDeck}
-          setPlayerHp={(hp) => { setPlayer1Hp(hp); }}
+          <Player
+            playerName="player1"
+            playerHp={player1Hp}
+            manaDeck={player1ManaDeck}
+            instantsDeck={player1InstantDeck}
+            sorceryDeck={player1SorceryDeck}
+            creatureDeck={player1CreatureDeck}
+            setPlayerHp={(hp) => { setPlayer1Hp(hp); }}
+            useSorcery={(sorceryCardId, creatureCardId) => {
 
-          attackWithInstant={(player, manaCost, damage, cardId) => {
-            if (!spendMana(player, manaCost)) { return; };
-            dealDamage(player, damage);
-            removeUsedInstantCard(player, cardId);
-          }}
-          summonCreature={(player, cardId) => {
-            summonCreature(player, cardId);
-          }}
-        />
+            }}
+            attackWithInstant={(player, manaCost, damage, cardId) => {
+              if (!spendMana(player, manaCost)) { return; };
+              dealDamage(player, damage);
+              removeUsedInstantCard(player, cardId);
+            }}
+            summonCreature={(player, cardId) => {
+              summonCreature(player, cardId);
+            }}
+          />
 
-        <div className="playfield">
-          <h2>Playfield</h2>
-          {actionMessage != null &&
-            <ActionMessage message={actionMessage}
-              clear={() => { setactionMessage(null); }}
-            />
-          }
-          <div className="row">
-            <div className="player-playfield">
-              <p>player 1</p>
-              {
-                player1SummonedCreatures && player1SummonedCreatures.map((card, index) => {
-                  return <CreatureCard
-                    card={card}
-                    id={index}
-                    summoned={true}
-                    creatureAttack={(card) => {
-                      setPlayer2Hp(player2Hp - card.strength);
-                    }}
-                  />;
-                })
-              }
-            </div>
-            <div className="player-playfield">
-              <p>player 2</p>
-              {
-                player2SummonedCreatures && player2SummonedCreatures.map((card, index) => {
-                  return <CreatureCard
-                    card={card}
-                    id={index}
-                    summoned={true}
-                    creatureAttack={(card) => {
-                      setPlayer1Hp(player1Hp - card.strength);
-                    }}
-                  />;
-                })
-              }
+          <div className="playfield">
+            <h2>Playfield</h2>
+            {actionMessage != null &&
+              <ActionMessage message={actionMessage}
+                clear={() => { setactionMessage(null); }}
+              />
+            }
+            <div className="row">
+              <div className="player-playfield">
+                <p>player 1</p>
+                {
+                  player1SummonedCreatures && player1SummonedCreatures.map((card, index) => {
+                    return <CreatureCard
+                      card={card}
+                      id={index}
+                      summoned={true}
+                      creatureAttack={(card) => {
+                        console.log("playfield creature", card);
+                        setPlayer2Hp(player2Hp - card.strength);
+                      }}
+                    />;
+                  })
+                }
+              </div>
+              <div className="player-playfield">
+                <p>player 2</p>
+                {
+                  player2SummonedCreatures && player2SummonedCreatures.map((card, index) => {
+                    return <CreatureCard
+                      card={card}
+                      id={index}
+                      summoned={true}
+                      creatureAttack={(card) => {
+                        setPlayer1Hp(player1Hp - card.strength);
+                      }}
+                    />;
+                  })
+                }
+              </div>
             </div>
           </div>
-        </div>
 
-        <Player
-          playerName="player2"
-          playerHp={player2Hp}
-          manaDeck={player2ManaDeck}
-          instantsDeck={player2InstantDeck}
-          sorceryDeck={player2SorceryDeck}
-          creatureDeck={player2CreatureDeck}
-          setPlayerHp={(hp) => setPlayer2Hp(hp)}
-          attackWithInstant={(damage, manaCost, cardId) => {
-            if (manaDeck.length > 0) {
-              var newManaDeck = [...manaDeck];
-              for (var i = 0; i < manaCost; i++) {
-                newManaDeck.pop();
+          <Player
+            playerName="player2"
+            playerHp={player2Hp}
+            manaDeck={player2ManaDeck}
+            instantsDeck={player2InstantDeck}
+            sorceryDeck={player2SorceryDeck}
+            creatureDeck={player2CreatureDeck}
+            setPlayerHp={(hp) => setPlayer2Hp(hp)}
+            attackWithInstant={(damage, manaCost, cardId) => {
+              if (manaDeck.length > 0) {
+                var newManaDeck = [...manaDeck];
+                for (var i = 0; i < manaCost; i++) {
+                  newManaDeck.pop();
+                }
+                setmanaDeck(newManaDeck);
+                var newInstantsDeck = [...instantsDeck];
+                newInstantsDeck.splice(cardId, 1);
+                setinstantsDeck(newInstantsDeck);
+                setPlayer1Hp(player1Hp - damage);
               }
-              setmanaDeck(newManaDeck);
-              var newInstantsDeck = [...instantsDeck];
-              newInstantsDeck.splice(cardId, 1);
-              setinstantsDeck(newInstantsDeck);
-              setPlayer1Hp(player1Hp - damage);
-            }
-          }}
-          summonCreature={(card, cardId) => {
-            var newCreatureDeck = [...creatureDeck];
-            newCreatureDeck.splice(cardId, 1);
-            setCreatureDeck(newCreatureDeck);
+            }}
+            summonCreature={(card, cardId) => {
+              var newCreatureDeck = [...creatureDeck];
+              newCreatureDeck.splice(cardId, 1);
+              setCreatureDeck(newCreatureDeck);
 
-            var newPlayer2SummonedCreatures = [...player2SummonedCreatures];
-            newPlayer2SummonedCreatures.push(card);
-            setPlayer2SummonedCreatures(newPlayer2SummonedCreatures);
-          }}
-        />
-      </div>
-    </div >
+              var newPlayer2SummonedCreatures = [...player2SummonedCreatures];
+              newPlayer2SummonedCreatures.push(card);
+              setPlayer2SummonedCreatures(newPlayer2SummonedCreatures);
+            }}
+          />
+        </div>
+      </div >
+    </SelectedSorceryCardContext.Provider>
   );
 }

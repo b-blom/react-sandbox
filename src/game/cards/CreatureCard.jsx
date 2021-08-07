@@ -10,6 +10,11 @@ export default function CreatureCard(props) {
           {props.card.strength}/{props.card.health}
         </span>
       </h6>
+      {props.creatureStatus && props.creatureStatus.length > 0 &&
+        <p>status: {props.creatureStatus.map(status => {
+          return (<span>{status.statusImage}</span>);
+        })}</p>
+      }
       <div className="card-image">{props.card.creatureImage}</div>
       {props.summoned ?
         <button className="utility-button" onClick={() => props.creatureAttack(props.card)}>Attack</button>

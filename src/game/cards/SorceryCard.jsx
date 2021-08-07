@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./Card.css";
 
 
@@ -15,7 +15,9 @@ export default function SorceryCard(props) {
         </div>
       </button>
       {showMenu &&
-        <div className="ability-button">
+
+        <div className="ability-button sorcery-selected">
+          {props.activeCard(props.card, props.id)}
           <p className="small-font">
             {props.card.sorceryDescription}
           </p>
