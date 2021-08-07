@@ -90,6 +90,16 @@ export default function todo() {
   // return list of categories and number of tasks in each category
 
   const categoriesList = () => {
+    console.log(todoList);
+
+    var listOfAllTasks = [];
+
+    const categories = todoList.categories;
+    categories.map(task => {
+      listOfAllTasks.push(task);
+    });
+
+    console.log(listOfAllTasks);
     return (todoList.categories.map(category => {
       return (
         <button>
@@ -110,9 +120,9 @@ export default function todo() {
   return (
     <div>
       {categoriesList()}
+      <table><tr><td>data in the row</td></tr></table>
     </div>
   );
 }
 
 
-export const todoList = todoList;
