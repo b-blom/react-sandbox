@@ -1,7 +1,7 @@
 import './App.css';
 import "./game/gameComponents/Action.css";
 import Game from './game/Game';
-import Todo from "./todo";
+import Todo from "./todoWithQuoakka";
 
 function App() {
   return (
