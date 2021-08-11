@@ -1,13 +1,12 @@
 import './App.css';
-import "./game/gameComponents/Action.css";
-import Game from './game/Game';
+import './game/gameComponents/Action.css';
+import GameRouter from './GameRouter';
 
 function App() {
   return (
     <div className='App'>
-      <Game />
-      <header className='App-header'>
-      </header>
+      <GameRouter />
+      <header className='App-header'></header>
     </div>
   );
 }
