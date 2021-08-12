@@ -1,0 +1,91 @@
+import React, { useState } from 'react';
+
+import { gql, useQuery, useMutation } from '@apollo/client';
+import ManaCard from '../../game/cards/ManaCard';
+
+const MANA_CARD_QUERY = gql`
+  {
+    manaCards {
+      name
+      type
+      image
+    }
+  }
+`;
+
+const ADD_MANA_CARD = gql`
+  mutation ($name: String!, $type: String!, $image: String!) {
+    createManaCard(name: $name, type: $type, image: $image) {
+      name
+      type
+      image
+    }
+  }
+`;
+
+export default function ManaCardCreator() {
+  const { data, loading, error } = useQuery(MANA_CARD_QUERY);
+
+  const [inputCardName, setInputCardName] = useState('');
+  const [inputCardType, setInputCardType] = useState('');
+  const [inputCardImage, setInputCardImage] = useState('');
+
+  const [createManaCard, { updatedData, addCardLoading, addCardError }] =
+    useMutation(ADD_MANA_CARD, {
+      refetchQueries: [MANA_CARD_QUERY, 'manaCards'],
+    });
+
+  if (loading || addCardLoading) return 'loading';
+  if (error || addCardError)
+    return <pre>{`error: ${error.message || addCardError.message}`}</pre>;
+
+  return (
+    <div>
+      render all cards here
+      {data.manaCards.map((manaCard) => {
+        return <ManaCard card={manaCard} />;
+      })}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '40%',
+          margin: '0 auto',
+          border: '3px dotted gold',
+          padding: '10px',
+        }}>
+        <h4>create cards here</h4>
+        <label>Card name</label>
+        <input
+          type='text'
+          value={inputCardName}
+          onChange={(e) => setInputCardName(e.target.value)}
+        />
+        <label>Card type</label>
+        <input
+          type='text'
+          value={inputCardType}
+          onChange={(e) => setInputCardType(e.target.value)}
+        />
+        <label>Card image</label>
+        <input
+          type='text'
+          value={inputCardImage}
+          onChange={(e) => setInputCardImage(e.target.value)}
+        />
+        <button
+          onClick={() =>
+            createManaCard({
+              variables: {
+                name: inputCardName,
+                type: inputCardType,
+                image: inputCardImage,
+              },
+            })
+          }>
+          create card
+        </button>
+      </div>
+    </div>
+  );
+}
