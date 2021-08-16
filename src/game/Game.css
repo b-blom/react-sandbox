@@ -1,7 +1,11 @@
-.row{
+.row {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.black-border {
+  border: 2px solid black;
 }
 
 .column {
@@ -10,7 +14,7 @@
   justify-content: space-around;
 }
 
-.game-wrapper{
+.game-wrapper {
   background-color: rgb(109, 99, 99);
   width: 100%;
 }
@@ -19,7 +23,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
 }
 
 .player-playfield {
@@ -27,25 +30,25 @@
   border-radius: 10px;
 }
 
-.player-card-wrapper{
+.player-card-wrapper {
   width: 50%;
   border: 1px solid gainsboro;
   border-radius: 10px;
 }
 
-.player{
+.player {
   width: 20%;
   border: 1px solid gainsboro;
   border-radius: 10px;
   margin: 5px;
 }
 
-.playfield{
- 
+.playfield {
   width: 55%;
   border: 1px solid gainsboro;
   border-radius: 10px;
-  margin: 5px;}
+  margin: 5px;
+}
 
 .board-element {
   width: 50%;
@@ -61,10 +64,24 @@
 }
 
 .action-board > div {
-  margin:0;
+  margin: 0;
 }
 
 .action-board > div > p {
   margin: 0;
   padding: 0;
+}
+
+.card-deck-body {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 90%;
+}
+
+.deck-card-styler {
+  width: 70px;
+  border: 2px solid tomato;
+  margin: 5px;
+  justify-content: flex-start;
 }

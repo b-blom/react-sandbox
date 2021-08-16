@@ -7,18 +7,18 @@ const MANA_CARD_QUERY = gql`
   {
     manaCards {
       name
-      type
       image
+      type
     }
   }
 `;
 
 const ADD_MANA_CARD = gql`
-  mutation ($name: String!, $type: String!, $image: String!) {
-    createManaCard(name: $name, type: $type, image: $image) {
+  mutation ($name: String!, $image: String!, $type: String!) {
+    createManaCard(name: $name, image: $image, type: $type) {
       name
-      type
       image
+      type
     }
   }
 `;
@@ -40,38 +40,33 @@ export default function ManaCardCreator() {
     return <pre>{`error: ${error.message || addCardError.message}`}</pre>;
 
   return (
-    <div>
-      render all cards here
-      {data.manaCards.map((manaCard) => {
-        return <ManaCard card={manaCard} />;
-      })}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+      }}>
       <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          width: '40%',
-          margin: '0 auto',
-          border: '3px dotted gold',
-          padding: '10px',
-        }}>
-        <h4>create cards here</h4>
+        className='card-creator-input'
+        style={{ border: '1px solid red', width: '30%' }}>
+        <p>create mana card</p>
         <label>Card name</label>
         <input
           type='text'
           value={inputCardName}
           onChange={(e) => setInputCardName(e.target.value)}
         />
-        <label>Card type</label>
-        <input
-          type='text'
-          value={inputCardType}
-          onChange={(e) => setInputCardType(e.target.value)}
-        />
         <label>Card image</label>
         <input
           type='text'
           value={inputCardImage}
           onChange={(e) => setInputCardImage(e.target.value)}
+        />
+        <label>Card type</label>
+        <input
+          type='text'
+          value={inputCardType}
+          onChange={(e) => setInputCardType(e.target.value)}
         />
         <button
           onClick={() =>
@@ -85,6 +80,15 @@ export default function ManaCardCreator() {
           }>
           create card
         </button>
+      </div>
+      <div
+        style={{
+          border: '1px solid red',
+          width: '30%',
+        }}>
+        {data.manaCards.map((manaCard) => {
+          return <ManaCard card={manaCard} />;
+        })}
       </div>
     </div>
   );

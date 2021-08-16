@@ -1,3 +1,11 @@
+.card-creator-input {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  border: 3px dotted gold;
+  padding: 10px;
+}
+
 .mana-wrapper {
   border: 2px solid black;
   border-radius: 10px;
@@ -7,7 +15,7 @@
   padding: 10px;
 }
 
-.creature-wrapper{
+.creature-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -16,7 +24,7 @@
   padding: 10px;
 }
 
-.support-cards-wrapper{
+.support-cards-wrapper {
   display: flex;
   flex-direction: row;
   border: 2px solid black;
@@ -24,7 +32,7 @@
   padding: 5px;
 }
 
-.support-card-type-wrapper{
+.support-card-type-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -33,7 +41,7 @@
   padding: 5px;
 }
 
-.sorcery-wrapper{
+.sorcery-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -43,25 +51,24 @@
   padding: 10px;
 }
 
-.playing-card{
+.playing-card {
   margin: 3px;
   border: 2px solid gold;
   border-radius: 5%;
   background-color: silver;
 }
 
-.support-card{
+.support-card {
 }
 
-.mana-card{
-  width: 20%;
+.mana-card {
 }
 
 .playing-card > h6 {
   margin: 4px;
 }
 .mana-card > p {
-  margin:0px;
+  margin: 0px;
   font-size: 8px;
 }
 .creature-card > p {
@@ -75,23 +82,20 @@
   margin-bottom: 5px;
   background-color: black;
 }
-.mana-image{
+.mana-image {
   margin: 0 auto;
-
 }
 
-.small-font{
+.small-font {
   font-size: 8px;
   margin: 2px 0px;
 }
 
-
-
 .creature-card {
-width: 120px;
+  width: 120px;
 }
 
-.card-image{
+.card-image {
   padding: 5px;
   margin: 10px;
 }
@@ -113,13 +117,13 @@ width: 120px;
   cursor: grabbing;
 }
 
-.ability-button{
+.ability-button {
   border: 1px dotted gray;
   margin: 5px;
   padding: 5px;
 }
 
-.utility-button{
+.utility-button {
   border: 1px dotted gray;
   width: 90%;
   margin: 5px;
