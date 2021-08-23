@@ -1,7 +1,6 @@
 import React from 'react';
 import InstantCardCreator from './pageComponents/InstantCardCreator';
 import ManaCardCreator from './pageComponents/ManaCardCreator';
-import ViewCard from './ViewCard';
 
 export default function ContentCreator() {
 	return (

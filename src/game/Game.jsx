@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Player from './gameComponents/Player';
 import ActionMessage from './gameComponents/ActionMessage';
 import CreatureCard from './cards/CreatureCard';
 import './Game.css';
-import SorceryCard from './cards/SorceryCard';
 import { SelectedSorceryCardContext } from '../context/SorceryContext';
 import PlayGame from '../pages/pageComponents/PlayGame';
 
@@ -49,7 +48,7 @@ export default function Game() {
 		},
 	]);
 
-	const [sorceryDeck, setsorceryDeck] = useState([
+	const [sorceryDeck /* , setsorceryDeck */] = useState([
 		{
 			sorceryName: 'bless',
 			sorceryDescription: 'Raise strength with 100%',
@@ -106,14 +105,15 @@ export default function Game() {
 	const [player1CreatureDeck, setPlayer1CreatureDeck] = useState(creatureDeck);
 	const [player1ManaDeck, setPlayer1ManaDeck] = useState(manaDeck);
 	const [player1InstantDeck, setPlayer1InstantDeck] = useState(instantsDeck);
-	const [player1SorceryDeck, setPlayer1SorceryDeck] = useState(sorceryDeck);
+	const [player1SorceryDeck /* setPlayer1SorceryDeck*/] = useState(sorceryDeck);
 	const [player1SummonedCreatures, setPlayer1SummonedCreatures] = useState([]);
 
 	const [player2Hp, setPlayer2Hp] = useState(20);
 	const [player2CreatureDeck, setPlayer2CreatureDeck] = useState(creatureDeck);
 	const [player2ManaDeck, setPlayer2ManaDeck] = useState(manaDeck);
 	const [player2InstantDeck, setPlayer2InstantDeck] = useState(instantsDeck);
-	const [player2SorceryDeck, setPlayer2SorceryDeck] = useState(sorceryDeck);
+	const [player2SorceryDeck /*, setPlayer2SorceryDeck*/] =
+		useState(sorceryDeck);
 	const [player2SummonedCreatures, setPlayer2SummonedCreatures] = useState([]);
 
 	// helper functions
