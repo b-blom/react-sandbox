@@ -53,10 +53,7 @@ export default function ManaCardCreator() {
 				justifyContent: 'space-evenly',
 			}}
 		>
-			<div
-				className='card-creator-input'
-				style={{ border: '1px solid red', width: '30%' }}
-			>
+			<div className='card-creator-input'>
 				<p>create mana card</p>
 				<label>Card name</label>
 				<input
@@ -91,14 +88,9 @@ export default function ManaCardCreator() {
 					create card
 				</button>
 			</div>
-			<div
-				style={{
-					border: '1px solid red',
-					width: '30%',
-				}}
-			>
-				{data.manaCards.map((manaCard) => {
-					return <ManaCard card={manaCard} />;
+			<div className='black-border'>
+				{data.manaCards.map((manaCard, index) => {
+					return <ManaCard card={manaCard} key={index} />;
 				})}
 			</div>
 		</div>

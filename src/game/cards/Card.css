@@ -1,146 +1,153 @@
 .card-creator-input {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  border: 3px dotted gold;
-  padding: 10px;
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+	border: 3px dotted gold;
+	padding: 10px;
 }
 
 .mana-wrapper {
-  border: 2px solid black;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  padding: 10px;
+	border: 2px solid black;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 10px;
 }
 
 .creature-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 10px;
 }
 
 .support-cards-wrapper {
-  display: flex;
-  flex-direction: row;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 5px;
+	display: flex;
+	flex-direction: row;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 5px;
 }
 
 .support-card-type-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border: 2px solid gray;
-  border-radius: 5px;
-  padding: 5px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	border: 2px solid gray;
+	border-radius: 5px;
+	padding: 5px;
 }
 
 .sorcery-wrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 30%;
-  border: 2px solid gray;
-  border-radius: 10px;
-  padding: 10px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 30%;
+	border: 2px solid gray;
+	border-radius: 10px;
+	padding: 10px;
 }
 
 .playing-card {
-  margin: 3px;
-  border: 2px solid gold;
-  border-radius: 5%;
-  background-color: silver;
+	margin: 3px;
+	border: 2px solid gold;
+	border-radius: 5%;
+	background-color: silver;
 }
 
 .support-card {
 }
 
 .mana-card {
+	width: 150px;
 }
 
 .playing-card > h6 {
-  margin: 4px;
+	margin: 4px;
 }
 .mana-card > p {
-  margin: 0px;
-  font-size: 8px;
+	margin: 0px;
+	font-size: 8px;
 }
 .creature-card > p {
-  margin: 15px 10px;
-  font-size: 8px;
+	margin: 15px 10px;
+	font-size: 8px;
 }
 
 .mana-color {
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background-color: black;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	background-color: black;
 }
 .mana-image {
-  margin: 0 auto;
+	margin: 0 auto;
 }
 
 .small-font {
-  font-size: 8px;
-  margin: 2px 0px;
+	font-size: 8px;
+	margin: 2px 0px;
 }
 
 .creature-card {
-  width: 120px;
+	width: 120px;
 }
 
 .card-image {
-  padding: 5px;
-  margin: 10px;
+	padding: 5px;
+	margin: 10px;
 }
 
 .card-button {
-  background-color: inherit;
-  width: 100%;
-  border: none;
-  padding: 0;
-  margin: 0;
+	background-color: inherit;
+	width: 100%;
+	border: none;
+	padding: 0;
+	margin: 0;
 }
 
 .card-button > h6 {
-  margin: 4px;
+	margin: 4px;
 }
 
 .card-button:hover {
-  background-color: rgba(255, 217, 0, 0.384);
-  cursor: grabbing;
+	background-color: rgba(255, 217, 0, 0.384);
+	cursor: grabbing;
 }
 
 .ability-button {
-  border: 1px dotted gray;
-  margin: 5px;
-  padding: 5px;
+	border: 1px dotted gray;
+	margin: 5px;
+	padding: 5px;
 }
 
 .utility-button {
-  border: 1px dotted gray;
-  width: 90%;
-  margin: 5px;
-  padding: 5px;
-  background-color: inherit;
+	border: 1px dotted gray;
+	width: 90%;
+	margin: 5px;
+	padding: 5px;
+	background-color: inherit;
 }
 
 .utility-button:hover {
-  background-color: rgba(255, 217, 0, 0.384);
-  cursor: grabbing;
+	background-color: rgba(255, 217, 0, 0.384);
+	cursor: grabbing;
 }
 
 .ability-button:hover {
-  background-color: rgba(255, 217, 0, 0.384);
-  cursor: grabbing;
+	background-color: rgba(255, 217, 0, 0.384);
+	cursor: grabbing;
 }
 
 .sorcery-selected {
-  background-color: rgba(255, 217, 0, 0.384);
+	background-color: rgba(255, 217, 0, 0.384);
+}
+
+.deck-creator-card-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

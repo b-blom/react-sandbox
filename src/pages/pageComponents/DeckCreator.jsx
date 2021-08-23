@@ -36,17 +36,28 @@ export default function DeckCreator() {
 	return (
 		<div>
 			<pre>{JSON.stringify(player1Deck)}</pre>
-			<div>
+			<div className='deck-creator-card-list'>
 				{data.instantCards &&
-					data.instantCards.map((card) => {
-						return <InstantCard card={card} />;
+					data.instantCards.map((card, index) => {
+						return (
+							<div className='select-card-wrapper' key={index}>
+								<InstantCard card={card} />;
+								<button
+									onClick={() => {
+										addToDeck(card);
+									}}
+								>
+									Select card
+								</button>
+							</div>
+						);
 					})}
 			</div>
-			<div>
+			<div className='deck-creator-card-list'>
 				{data.manaCards &&
-					data.manaCards.map((card) => {
+					data.manaCards.map((card, index) => {
 						return (
-							<div>
+							<div key={index} className='select-card-wrapper'>
 								<ManaCard card={card} />
 								<button
 									onClick={() => {
@@ -59,10 +70,8 @@ export default function DeckCreator() {
 						);
 					})}
 			</div>
-			{player1Deck.map((card) => {
-				console.log('player1Render', card);
-				console.log(player1Deck);
-				return <p>{card.name}</p>;
+			{player1Deck.map((card, index) => {
+				return <p key={index}> {card.name}</p>;
 			})}
 		</div>
 	);

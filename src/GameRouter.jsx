@@ -4,6 +4,7 @@ import Game from './game/Game';
 import Home from './game/Home';
 import ContentCreator from './pages/ContentCreator';
 import DeckCreator from './pages/pageComponents/DeckCreator';
+import Arena from './game/Arena';
 import CardDeck from './game/cards/CardDeck';
 import { DeckContext } from './context/DeckContext';
 
@@ -32,6 +33,9 @@ export default function GameRouter() {
 						<Link to='/createdeck'>Create deck</Link>
 					</li>
 					<li>
+						<Link to='/arena'>Arena</Link>
+					</li>
+					<li>
 						<Link to='/game'>Play field</Link>
 					</li>
 					<li>
@@ -50,6 +54,9 @@ export default function GameRouter() {
 					</Route>
 					<Route path='/game'>
 						<Game />
+					</Route>
+					<Route path='/arena'>
+						<Arena />
 					</Route>
 					<Route path='/displayDeck'>
 						<CardDeck />
