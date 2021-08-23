@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import InstantCard from '../../game/cards/InstantCard';
 import ManaCard from '../../game/cards/ManaCard';
+import { DeckContext } from '../../context/DeckContext';
 
 const CARDS_QUERY = gql`
 	{
@@ -18,13 +19,15 @@ const CARDS_QUERY = gql`
 `;
 
 export default function DeckCreator() {
+	const { player1Deck, setPlayer1Deck } = useContext(DeckContext);
+
 	const { data, loading, error } = useQuery(CARDS_QUERY);
-	const [playerDeck, setPlayerDeck] = useState([]);
 
 	const addToDeck = (card) => {
-		var newDeck = [...playerDeck];
+		var newDeck = [...player1Deck];
 		newDeck.push(card);
-		setPlayerDeck(newDeck);
+		setPlayer1Deck(newDeck);
+		console.log(newDeck);
 	};
 
 	if (loading) return <h2>loading</h2>;
@@ -32,6 +35,7 @@ export default function DeckCreator() {
 	console.log(data);
 	return (
 		<div>
+			<pre>{JSON.stringify(player1Deck)}</pre>
 			<div>
 				{data.instantCards &&
 					data.instantCards.map((card) => {
@@ -55,7 +59,9 @@ export default function DeckCreator() {
 						);
 					})}
 			</div>
-			{playerDeck.map((card) => {
+			{player1Deck.map((card) => {
+				console.log('player1Render', card);
+				console.log(player1Deck);
 				return <p>{card.name}</p>;
 			})}
 		</div>
