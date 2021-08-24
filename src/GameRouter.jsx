@@ -38,9 +38,6 @@ export default function GameRouter() {
 					<li>
 						<Link to='/game'>Play field</Link>
 					</li>
-					<li>
-						<Link to='/displayDeck'>display deck</Link>
-					</li>
 				</ul>
 				<Switch>
 					<Route exact path='/'>
@@ -57,9 +54,6 @@ export default function GameRouter() {
 					</Route>
 					<Route path='/arena'>
 						<Arena />
-					</Route>
-					<Route path='/displayDeck'>
-						<CardDeck />
 					</Route>
 				</Switch>
 			</Router>
