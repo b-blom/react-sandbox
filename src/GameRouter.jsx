@@ -5,7 +5,6 @@ import Home from './game/Home';
 import ContentCreator from './pages/ContentCreator';
 import DeckCreator from './pages/pageComponents/DeckCreator';
 import Arena from './game/Arena';
-import CardDeck from './game/cards/CardDeck';
 import { DeckContext } from './context/DeckContext';
 
 export default function GameRouter() {
