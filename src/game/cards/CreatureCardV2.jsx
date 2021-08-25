@@ -6,6 +6,7 @@ export default function CreatureCardV2(props) {
 			<button className='card-button'>
 				<h6> {props.card.name} </h6>
 				<div className='card-image'>{props.card.image}</div>
+				<p>{props.card.type}</p>
 			</button>
 		</div>
 	);

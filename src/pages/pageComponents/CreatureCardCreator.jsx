@@ -6,10 +6,39 @@ const CREATURE_CARD_QUERY = gql`
 	{
 		creatureCards {
 			name
+			image
+			type
+			strength
+			defense
+			ability
 		}
 	}
 `;
 /* 
+const ADD_CREATURE_CARD = gql`
+	mutation (
+		$name: String!
+		$image: String!
+		$type: String!
+		$strength: Int!
+		$defense: Int!
+		$ability: String!
+		) {
+			createCreatureCard(
+				name: $name
+				image: $image
+				type: $type
+				strength: 1
+				defense: $defense
+				ability: $ability
+				) {
+					name
+					image
+					type
+				}
+			}
+			`; */
+
 const ADD_CREATURE_CARD = gql`
 	mutation (
 		$name: String!
@@ -23,21 +52,16 @@ const ADD_CREATURE_CARD = gql`
 			name: $name
 			image: $image
 			type: $type
-			strength: 1
+			strength: $strength
 			defense: $defense
 			ability: $ability
 		) {
 			name
 			image
 			type
-		}
-	}
-`; */
-
-const ADD_CREATURE_CARD = gql`
-	mutation ($name: String!) {
-		createCreatureCard(name: $name) {
-			name
+			strength
+			defense
+			ability
 		}
 	}
 `;
@@ -94,14 +118,14 @@ export default function CreatureCardCreator() {
 				/>
 				<label htmlFor='strengthInput'>creature strength</label>
 				<input
-					type='text'
+					type='number'
 					name='cardStrength'
 					value={cardStrength}
 					onChange={(event) => setCardStrength(event.target.value)}
 				/>
 				<label htmlFor='defenseInput'>creature defense</label>
 				<input
-					type='text'
+					type='number'
 					name='cardDefense'
 					value={cardDefense}
 					onChange={(event) => setCardDefense(event.target.value)}
@@ -115,14 +139,14 @@ export default function CreatureCardCreator() {
 				/>
 				<button
 					onClick={() => {
-						console.log('strength', cardStrength);
+						console.log(cardName, cardImage);
 						createCreatureCard({
 							variables: {
 								name: cardName,
 								image: cardImage,
 								type: 'creature',
-								stength: cardStrength,
-								defense: cardDefense,
+								strength: parseInt(cardStrength),
+								defense: parseInt(cardDefense),
 								ability: cardAbility,
 							},
 						});
@@ -133,10 +157,9 @@ export default function CreatureCardCreator() {
 				</button>
 			</div>
 			<div className='black-border'>
-				{' '}
 				{data.creatureCards.map((creatureCard, index) => {
 					return <CreatureCardV2 card={creatureCard} key={index} />;
-				})}{' '}
+				})}
 			</div>
 		</div>
 	);
