@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
-import CreatureCardV2 from '../../game/cards/CreatureCardV2';
+import CreatureCard from '../../game/cards/CreatureCard';
 
 const CREATURE_CARD_QUERY = gql`
 	{
@@ -158,7 +158,9 @@ export default function CreatureCardCreator() {
 			</div>
 			<div className='black-border'>
 				{data.creatureCards.map((creatureCard, index) => {
-					return <CreatureCardV2 card={creatureCard} key={index} />;
+					return (
+						<CreatureCard card={creatureCard} key={index} deckCreator={true} />
+					);
 				})}
 			</div>
 		</div>
