@@ -9,9 +9,12 @@ import { DeckContext } from './context/DeckContext';
 
 export default function GameRouter() {
 	const [player1Deck, setPlayer1Deck] = useState([]);
+	const [player1Hand, setPlayer1Hand] = useState([]);
 
 	return (
-		<DeckContext.Provider value={{ player1Deck, setPlayer1Deck }}>
+		<DeckContext.Provider
+			value={{ player1Deck, setPlayer1Deck, player1Hand, setPlayer1Hand }}
+		>
 			<Router>
 				<ul
 					style={{
