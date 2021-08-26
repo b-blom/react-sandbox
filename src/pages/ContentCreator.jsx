@@ -9,10 +9,10 @@ export default function ContentCreator() {
 				<div className='black-border'>
 					<CreatureCardCreator />
 				</div>
-				<div className='black-border' style={{ width: '40%' }}>
+				<div className='black-border'>
 					<ManaCardCreator />
 				</div>
-				<div className='black-border' style={{ width: '40%' }}>
+				<div className='black-border'>
 					<InstantCardCreator />
 				</div>
 			</div>

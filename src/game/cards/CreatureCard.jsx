@@ -8,7 +8,15 @@ export default function CreatureCard(props) {
 			<h6>
 				{props.card.creatureName || props.card.name} {'  '}
 				<span style={{ fontStyle: 'italic', fontWeight: '300' }}>
-					{props.card.strength}/{props.card.health || props.card.defense}
+					{props.card.strength || props.card.damage}/
+					{props.card.health || props.card.defense}
+				</span>
+			</h6>
+			<h6 style={{ marginTop: '0px' }}>
+				<span
+					style={{ fontStyle: 'italic', fontWeight: '300', marginTop: '0px' }}
+				>
+					{props.card.type}
 				</span>
 			</h6>
 			{props.creatureStatus && props.creatureStatus.length > 0 && (
@@ -22,8 +30,7 @@ export default function CreatureCard(props) {
 			<div className='card-image'>
 				{props.card.creatureImage || props.card.image}
 			</div>
-			{console.log(props)}
-			{props.deckCreator && (
+			{props.deckCreator && props.card.ability && (
 				<div className='ability-button'>
 					<p className='small-font '>
 						<span>
@@ -35,6 +42,16 @@ export default function CreatureCard(props) {
 						</span>
 					</p>
 					<p className='small-font'>cost: {props.card.abilityCost}</p>
+				</div>
+			)}
+			{props.card.type === 'instant' && (
+				<div className='ability-button'>
+					<p className='small-font '>
+						<span style={{ fontStyle: 'italic' }}>
+							{props.card.description}
+						</span>
+					</p>
+					<p className='small-font'>cost: {props.card.cost}</p>
 				</div>
 			)}
 			{!props.deckCreator ? (
@@ -61,7 +78,6 @@ export default function CreatureCard(props) {
 					<button
 						className='utility-button'
 						onClick={() => {
-							console.log('hide', props.card.creatureName);
 							setBig(false);
 						}}
 					>
@@ -71,7 +87,6 @@ export default function CreatureCard(props) {
 					<button
 						className='utility-button'
 						onClick={() => {
-							console.log(`open`, props.card.creatureName, ':', props.card);
 							setBig(true);
 						}}
 					>

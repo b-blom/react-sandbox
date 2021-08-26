@@ -79,8 +79,6 @@ export default function Player(props) {
 									id={index}
 									card={card}
 									dealDamage={(manaCost, damage, cardId) => {
-										console.log('player.jsx dealDamage');
-
 										props.attackWithInstant(
 											props.playerName,
 											manaCost,

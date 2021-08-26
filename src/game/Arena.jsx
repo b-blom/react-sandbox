@@ -6,7 +6,6 @@ export default function Arena() {
 
 	const [drawedCard, setDrawedCard] = useState('draw a care');
 
-	console.log('Arena p1Deck', player1Deck);
 	return (
 		<div>
 			<h2>arena</h2>

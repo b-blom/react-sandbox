@@ -78,94 +78,98 @@ export default function CreatureCardCreator() {
 	};
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'row',
-				justifyContent: 'space-evenly',
-			}}
-		>
-			<div className='card-creator-input'>
-				<p>create creature card</p>
-				<label>Card name</label>
-				<input
-					type='text'
-					name='cardName'
-					value={cardName}
-					onChange={(event) => setCardName(event.target.value)}
-				/>
-				<label>Card image</label>
-				<input
-					type='text'
-					name='cardImage'
-					value={cardImage}
-					onChange={(event) => setCardImage(event.target.value)}
-				/>
-				<label htmlFor='strengthInput'>creature strength</label>
-				<input
-					type='number'
-					name='cardStrength'
-					value={cardStrength}
-					onChange={(event) => setCardStrength(event.target.value)}
-				/>
-				<label htmlFor='defenseInput'>creature defense</label>
-				<input
-					type='number'
-					name='cardDefense'
-					value={cardDefense}
-					onChange={(event) => setCardDefense(event.target.value)}
-				/>
-				<label htmlFor='creatureAbility'>creature ability</label>
-				<input
-					type='text'
-					name='cardAbility'
-					value={cardAbility}
-					onChange={(event) => setCardAbility(event.target.value)}
-				/>
-				<label htmlFor='creatureAbilityDescription'>
-					creature ability description
-				</label>
-				<input
-					type='text'
-					name='cardAbilityDescription'
-					value={cardAbilityDescription}
-					onChange={(event) => setCardAbilityDescription(event.target.value)}
-				/>
-				<label htmlFor='abilityCost'>ability cost</label>
-				<input
-					type='number'
-					name='cardAbilityCost'
-					value={cardAbilityCost}
-					onChange={(event) => setCardAbilityCost(event.target.value)}
-				/>
+		<div className='col'>
+			<h4>create creature card</h4>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+				}}
+			>
+				<div className='black-border col'>
+					<label>Card name</label>
+					<input
+						type='text'
+						name='cardName'
+						value={cardName}
+						onChange={(event) => setCardName(event.target.value)}
+					/>
+					<label>Card image</label>
+					<input
+						type='text'
+						name='cardImage'
+						value={cardImage}
+						onChange={(event) => setCardImage(event.target.value)}
+					/>
+					<label htmlFor='strengthInput'>creature strength</label>
+					<input
+						type='number'
+						name='cardStrength'
+						value={cardStrength}
+						onChange={(event) => setCardStrength(event.target.value)}
+					/>
+					<label htmlFor='defenseInput'>creature defense</label>
+					<input
+						type='number'
+						name='cardDefense'
+						value={cardDefense}
+						onChange={(event) => setCardDefense(event.target.value)}
+					/>
+					<label htmlFor='creatureAbility'>creature ability</label>
+					<input
+						type='text'
+						name='cardAbility'
+						value={cardAbility}
+						onChange={(event) => setCardAbility(event.target.value)}
+					/>
+					<label htmlFor='creatureAbilityDescription'>
+						creature ability description
+					</label>
+					<input
+						type='text'
+						name='cardAbilityDescription'
+						value={cardAbilityDescription}
+						onChange={(event) => setCardAbilityDescription(event.target.value)}
+					/>
+					<label htmlFor='abilityCost'>ability cost</label>
+					<input
+						type='number'
+						name='cardAbilityCost'
+						value={cardAbilityCost}
+						onChange={(event) => setCardAbilityCost(event.target.value)}
+					/>
 
-				<button
-					onClick={() => {
-						console.log(cardName, cardImage);
-						createCreatureCard({
-							variables: {
-								name: cardName,
-								image: cardImage,
-								type: 'creature',
-								strength: parseInt(cardStrength),
-								defense: parseInt(cardDefense),
-								ability: cardAbility,
-								abilityDescription: cardAbilityDescription,
-								abilityCost: parseInt(cardAbilityCost),
-							},
-						});
-						//	clearForm();
-					}}
-				>
-					create card
-				</button>
-			</div>
-			<div className='black-border'>
-				{data.creatureCards.map((creatureCard, index) => {
-					return (
-						<CreatureCard card={creatureCard} key={index} deckCreator={true} />
-					);
-				})}
+					<button
+						onClick={() => {
+							createCreatureCard({
+								variables: {
+									name: cardName,
+									image: cardImage,
+									type: 'creature',
+									strength: parseInt(cardStrength),
+									defense: parseInt(cardDefense),
+									ability: cardAbility,
+									abilityDescription: cardAbilityDescription,
+									abilityCost: parseInt(cardAbilityCost),
+								},
+							});
+							clearForm();
+						}}
+					>
+						create card
+					</button>
+				</div>
+				<div className='black-border'>
+					{data.creatureCards.map((creatureCard, index) => {
+						return (
+							<CreatureCard
+								card={creatureCard}
+								key={index}
+								deckCreator={true}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 	);

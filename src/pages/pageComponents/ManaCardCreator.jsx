@@ -27,7 +27,6 @@ export default function ManaCardCreator() {
 	const { data, loading, error } = useQuery(MANA_CARD_QUERY);
 
 	const [inputCardName, setInputCardName] = useState('');
-	const [inputCardType, setInputCardType] = useState('');
 	const [inputCardImage, setInputCardImage] = useState('');
 
 	const [createManaCard, { updatedData, addCardLoading, addCardError }] =
@@ -37,7 +36,6 @@ export default function ManaCardCreator() {
 
 	const clearForm = () => {
 		setInputCardName('');
-		setInputCardType('');
 		setInputCardImage('');
 	};
 
@@ -46,52 +44,47 @@ export default function ManaCardCreator() {
 		return <pre>{`error: ${error.message || addCardError.message}`}</pre>;
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'row',
-				justifyContent: 'space-evenly',
-			}}
-		>
-			<div className='card-creator-input'>
-				<p>create mana card</p>
-				<label>Card name</label>
-				<input
-					type='text'
-					value={inputCardName}
-					onChange={(e) => setInputCardName(e.target.value)}
-				/>
-				<label>Card image</label>
-				<input
-					type='text'
-					value={inputCardImage}
-					onChange={(e) => setInputCardImage(e.target.value)}
-				/>
-				<label>Card type</label>
-				<input
-					type='text'
-					value={inputCardType}
-					onChange={(e) => setInputCardType(e.target.value)}
-				/>
-				<button
-					onClick={() => {
-						createManaCard({
-							variables: {
-								name: inputCardName,
-								type: inputCardType,
-								image: inputCardImage,
-							},
-						});
-						clearForm();
-					}}
-				>
-					create card
-				</button>
-			</div>
-			<div className='black-border'>
-				{data.manaCards.map((manaCard, index) => {
-					return <ManaCard card={manaCard} key={index} />;
-				})}
+		<div className='col'>
+			<h4>create mana card</h4>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+				}}
+			>
+				<div className='black-border col'>
+					<label>Card name</label>
+					<input
+						type='text'
+						value={inputCardName}
+						onChange={(e) => setInputCardName(e.target.value)}
+					/>
+					<label>Card image</label>
+					<input
+						type='text'
+						value={inputCardImage}
+						onChange={(e) => setInputCardImage(e.target.value)}
+					/>
+					<button
+						onClick={() => {
+							createManaCard({
+								variables: {
+									name: inputCardName,
+									image: inputCardImage,
+									type: 'mana',
+								},
+							});
+							clearForm();
+						}}
+					>
+						create card
+					</button>
+				</div>
+				<div className='black-border'>
+					{data.manaCards.map((manaCard, index) => {
+						return <ManaCard card={manaCard} key={index} />;
+					})}
+				</div>
 			</div>
 		</div>
 	);

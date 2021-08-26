@@ -140,7 +140,6 @@ export default function Game() {
 		if (player === 'player2') {
 			setPlayer2ManaDeck(newManaDeck);
 		}
-		console.log(player1ManaDeck);
 
 		return true;
 	};
@@ -174,7 +173,6 @@ export default function Game() {
 	};
 
 	const summonCreature = (player, card, cardId) => {
-		console.log('summonCreature', player, cardId);
 		var newCreatureDeck = [];
 		var newSummonedCreatureDeck = [];
 		if (player === 'player1') {
@@ -255,7 +253,6 @@ export default function Game() {
 												id={index}
 												summoned={true}
 												creatureAttack={(card) => {
-													console.log('playfield creature', card);
 													setPlayer2Hp(player2Hp - card.strength);
 												}}
 											/>

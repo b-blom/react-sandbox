@@ -1,19 +1,36 @@
 import React, { useContext } from 'react';
 import { gql, useQuery } from '@apollo/client';
+import CreatureCard from '../../game/cards/CreatureCard';
 import InstantCard from '../../game/cards/InstantCard';
 import ManaCard from '../../game/cards/ManaCard';
 import { DeckContext } from '../../context/DeckContext';
+import RenderDeck from '../../game/cards/renderComponents/RenderDeck';
 
 const CARDS_QUERY = gql`
 	{
 		instantCards {
 			name
 			image
+			type
 			description
+			cost
+			damage
+			defense
 		}
 		manaCards {
 			name
 			image
+			type
+		}
+		creatureCards {
+			name
+			image
+			type
+			strength
+			defense
+			ability
+			abilityDescription
+			abilityCost
 		}
 	}
 `;
@@ -27,52 +44,83 @@ export default function DeckCreator() {
 		var newDeck = [...player1Deck];
 		newDeck.push(card);
 		setPlayer1Deck(newDeck);
-		console.log(newDeck);
 	};
 
 	if (loading) return <h2>loading</h2>;
 	if (error) return <h2>ERROR</h2>;
-	console.log(data);
+	console.log('deckCreator', data);
 	return (
-		<div>
-			<pre>{JSON.stringify(player1Deck)}</pre>
-			<div className='deck-creator-card-list'>
-				{data.instantCards &&
-					data.instantCards.map((card, index) => {
-						return (
-							<div className='select-card-wrapper' key={index}>
-								<InstantCard card={card} />;
-								<button
-									onClick={() => {
-										addToDeck(card);
-									}}
-								>
-									Select card
-								</button>
-							</div>
-						);
-					})}
+		<div className='row'>
+			<div className='col black-border' style={{ width: '30%' }}>
+				<h4> Player deck</h4>
+				<RenderDeck />
 			</div>
-			<div className='deck-creator-card-list'>
-				{data.manaCards &&
-					data.manaCards.map((card, index) => {
-						return (
-							<div key={index} className='select-card-wrapper'>
-								<ManaCard card={card} />
-								<button
-									onClick={() => {
-										addToDeck(card);
-									}}
-								>
-									select card
-								</button>
-							</div>
-						);
-					})}
+			<div className='col'>
+				<div className='black-border'>
+					<h4>Mana cards</h4>
+					<div className='deck-creator-card-list'>
+						<br />
+						{data.manaCards &&
+							data.manaCards.map((card, index) => {
+								return (
+									<div key={index} className='select-card-wrapper'>
+										<ManaCard card={card} />
+										<button
+											onClick={() => {
+												addToDeck(card);
+											}}
+										>
+											select card
+										</button>
+									</div>
+								);
+							})}
+					</div>
+				</div>
+				<div className='black-border'>
+					<h4>creature cards</h4>
+					<div className='deck-creator-card-list'>
+						{data.creatureCards &&
+							data.creatureCards.map((card, index) => {
+								return (
+									<div>
+										<CreatureCard card={card} key={index} deckCreator={true} />
+										<button
+											onClick={() => {
+												addToDeck(card);
+											}}
+										>
+											Select card
+										</button>
+									</div>
+								);
+							})}
+					</div>
+				</div>
+				<div className='black-border'>
+					<h4>instant cards</h4>
+					<div className='deck-creator-card-list'>
+						{data.instantCards &&
+							data.instantCards.map((card, index) => {
+								return (
+									<div className='select-card-wrapper' key={index}>
+										<CreatureCard card={card} deckCreator={true} />
+										<button
+											onClick={() => {
+												addToDeck(card);
+											}}
+										>
+											Select card
+										</button>
+									</div>
+								);
+							})}
+					</div>
+				</div>
+				{/* 			{player1Deck.map((card, index) => {
+					return <p key={index}> {card.name}</p>;
+				})} */}
 			</div>
-			{player1Deck.map((card, index) => {
-				return <p key={index}> {card.name}</p>;
-			})}
 		</div>
 	);
 }
