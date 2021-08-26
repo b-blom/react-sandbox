@@ -22,6 +22,21 @@ export default function CreatureCard(props) {
 			<div className='card-image'>
 				{props.card.creatureImage || props.card.image}
 			</div>
+			{console.log(props)}
+			{props.deckCreator && (
+				<div className='ability-button'>
+					<p className='small-font '>
+						<span>
+							<b>{props.card.ability}</b>
+						</span>
+						:{' '}
+						<span style={{ fontStyle: 'italic' }}>
+							{props.card.abilityDescription}
+						</span>
+					</p>
+					<p className='small-font'>cost: {props.card.abilityCost}</p>
+				</div>
+			)}
 			{!props.deckCreator ? (
 				props.summoned ? (
 					<button

@@ -11,10 +11,11 @@ const CREATURE_CARD_QUERY = gql`
 			strength
 			defense
 			ability
+			abilityDescription
+			abilityCost
 		}
 	}
 `;
-/* 
 const ADD_CREATURE_CARD = gql`
 	mutation (
 		$name: String!
@@ -23,30 +24,8 @@ const ADD_CREATURE_CARD = gql`
 		$strength: Int!
 		$defense: Int!
 		$ability: String!
-		) {
-			createCreatureCard(
-				name: $name
-				image: $image
-				type: $type
-				strength: 1
-				defense: $defense
-				ability: $ability
-				) {
-					name
-					image
-					type
-				}
-			}
-			`; */
-
-const ADD_CREATURE_CARD = gql`
-	mutation (
-		$name: String!
-		$image: String!
-		$type: String!
-		$strength: Int!
-		$defense: Int!
-		$ability: String!
+		$abilityDescription: String!
+		$abilityCost: Int!
 	) {
 		createCreatureCard(
 			name: $name
@@ -55,6 +34,8 @@ const ADD_CREATURE_CARD = gql`
 			strength: $strength
 			defense: $defense
 			ability: $ability
+			abilityDescription: $abilityDescription
+			abilityCost: $abilityCost
 		) {
 			name
 			image
@@ -74,6 +55,8 @@ export default function CreatureCardCreator() {
 	const [cardStrength, setCardStrength] = useState('');
 	const [cardDefense, setCardDefense] = useState('');
 	const [cardAbility, setCardAbility] = useState('');
+	const [cardAbilityDescription, setCardAbilityDescription] = useState('');
+	const [cardAbilityCost, setCardAbilityCost] = useState('');
 
 	const [createCreatureCard, { updatedData, addCardLoading, addCardError }] =
 		useMutation(ADD_CREATURE_CARD, {
@@ -90,6 +73,8 @@ export default function CreatureCardCreator() {
 		setCardStrength('');
 		setCardDefense('');
 		setCardAbility('');
+		setCardAbilityDescription('');
+		setCardAbilityCost('');
 	};
 
 	return (
@@ -137,6 +122,23 @@ export default function CreatureCardCreator() {
 					value={cardAbility}
 					onChange={(event) => setCardAbility(event.target.value)}
 				/>
+				<label htmlFor='creatureAbilityDescription'>
+					creature ability description
+				</label>
+				<input
+					type='text'
+					name='cardAbilityDescription'
+					value={cardAbilityDescription}
+					onChange={(event) => setCardAbilityDescription(event.target.value)}
+				/>
+				<label htmlFor='abilityCost'>ability cost</label>
+				<input
+					type='number'
+					name='cardAbilityCost'
+					value={cardAbilityCost}
+					onChange={(event) => setCardAbilityCost(event.target.value)}
+				/>
+
 				<button
 					onClick={() => {
 						console.log(cardName, cardImage);
@@ -148,6 +150,8 @@ export default function CreatureCardCreator() {
 								strength: parseInt(cardStrength),
 								defense: parseInt(cardDefense),
 								ability: cardAbility,
+								abilityDescription: cardAbilityDescription,
+								abilityCost: parseInt(cardAbilityCost),
 							},
 						});
 						//	clearForm();
