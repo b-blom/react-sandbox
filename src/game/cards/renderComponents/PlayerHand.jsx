@@ -9,6 +9,8 @@ export default function PlayerHand() {
 		setPlayer1Hand,
 		player1BattlefieldMana,
 		setPlayer1BattlefieldMana,
+		player1BattlefieldCreatures,
+		setPlayer1BattlefieldCreatures,
 	} = useContext(DeckContext);
 
 	async function drawCard() {
@@ -57,17 +59,36 @@ export default function PlayerHand() {
 								<td>
 									<button
 										onClick={() => {
-											console.log('summon to battlefield', card);
+											if (card.type === 'mana') {
+												// add card to battlefield
+												let newBattleFieldMana = [...player1BattlefieldMana];
+												newBattleFieldMana.push(card);
+												setPlayer1BattlefieldMana(newBattleFieldMana);
 
-											// add card to battlefield
-											let newBattleFieldMana = [...player1BattlefieldMana];
-											newBattleFieldMana.push(card);
-											setPlayer1BattlefieldMana(newBattleFieldMana);
+												//remove card from player hand
+												let newPlayerHand = [...player1Hand];
+												newPlayerHand.splice(index, 1);
+												setPlayer1Hand(newPlayerHand);
+											}
 
-											//remove card from player hand
-											let newPlayerHand = [...player1Hand];
-											newPlayerHand.splice(index, 1);
-											setPlayer1Hand(newPlayerHand);
+											if (card.type === 'creature') {
+												let newBattlefieldCreatures = [
+													...player1BattlefieldCreatures,
+												];
+												newBattlefieldCreatures.push(card);
+												setPlayer1BattlefieldCreatures(newBattlefieldCreatures);
+
+												let newPlayerHand = [...player1Hand];
+												newPlayerHand.splice(index, 1);
+												setPlayer1Hand(newPlayerHand);
+											}
+
+											if (card.type === 'instant') {
+												alert('used instant card ' + card.name);
+												let newPlayerHand = [...player1Hand];
+												newPlayerHand.splice(index, 1);
+												setPlayer1Hand(newPlayerHand);
+											}
 										}}
 									>
 										summon

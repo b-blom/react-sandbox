@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { DeckContext } from '../context/DeckContext';
 import PlayerHand from './cards/renderComponents/PlayerHand';
 import ManaCard from './cards/ManaCard';
+import CreatureCard from './cards/CreatureCard';
 
 export default function Arena() {
 	const {
@@ -9,6 +10,8 @@ export default function Arena() {
 		setPlayer1Deck,
 		player1BattlefieldMana,
 		setPlayer1BattlefieldMana,
+		player1BattlefieldCreatures,
+		setPlayer1BattlefieldCreatures,
 	} = useContext(DeckContext);
 
 	return (
@@ -22,10 +25,20 @@ export default function Arena() {
 				</div>
 				<div className='col black-border'>
 					<h2>battlefield</h2>
-					<div className='col'>
-						{player1BattlefieldMana.map((card, index) => {
-							return <ManaCard card={card} key={index} />;
-						})}
+					<div className='row'>
+						<div className='col'>
+							{player1BattlefieldMana.map((card, index) => {
+								if (card.type === 'mana') {
+									return <ManaCard card={card} key={index} />;
+								}
+								return 'no card type to render';
+							})}
+						</div>
+						<div className='col'>
+							{player1BattlefieldCreatures.map((card, index) => {
+								return <CreatureCard card={card} key={index} />;
+							})}
+						</div>
 					</div>
 				</div>
 			</div>

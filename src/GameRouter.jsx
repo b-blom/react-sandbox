@@ -11,7 +11,8 @@ export default function GameRouter() {
 	const [player1Deck, setPlayer1Deck] = useState([]);
 	const [player1Hand, setPlayer1Hand] = useState([]);
 	const [player1BattlefieldMana, setPlayer1BattlefieldMana] = useState([]);
-
+	const [player1BattlefieldCreatures, setPlayer1BattlefieldCreatures] =
+		useState([]);
 	return (
 		<DeckContext.Provider
 			value={{
@@ -21,6 +22,8 @@ export default function GameRouter() {
 				setPlayer1Hand,
 				player1BattlefieldMana,
 				setPlayer1BattlefieldMana,
+				player1BattlefieldCreatures,
+				setPlayer1BattlefieldCreatures,
 			}}
 		>
 			<button
@@ -34,21 +37,71 @@ export default function GameRouter() {
 						},
 						{
 							__typename: 'ManaCard',
-							image: '🔥',
-							name: 'Fire',
+							image: '🧊',
+							name: 'Ice',
 							type: 'mana',
 						},
 						{
 							__typename: 'ManaCard',
-							image: '🔥',
-							name: 'Fire',
+							image: '🧊',
+							name: 'Ice',
 							type: 'mana',
 						},
 						{
 							__typename: 'ManaCard',
-							image: '🔥',
-							name: 'Fire',
+							image: '🌍',
+							name: 'Earth',
 							type: 'mana',
+						},
+						{
+							__typename: 'ManaCard',
+							image: '🌍',
+							name: 'Earth',
+							type: 'mana',
+						},
+						{
+							__typename: 'ManaCard',
+							image: '🌌',
+							name: 'Space',
+							type: 'mana',
+						},
+						{
+							__typename: 'ManaCard',
+							image: '🌌',
+							name: 'Space',
+							type: 'mana',
+						},
+						{
+							__typename: 'CreatureCard',
+							ability: 'poop',
+							abilityCost: 1,
+							abilityDescription:
+								'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
+							defense: 1,
+							image: '🐦',
+							name: 'bird',
+							strength: 1,
+							type: 'creature',
+						},
+						{
+							__typename: 'InstantCard',
+							cost: 1,
+							damage: 3,
+							defense: 0,
+							description: '3 damage to anything',
+							image: '⚡',
+							name: 'bolt',
+							type: 'instant',
+						},
+						{
+							__typename: 'InstantCard',
+							cost: 1,
+							damage: 3,
+							defense: 0,
+							description: '3 damage to anything',
+							image: '⚡',
+							name: 'bolt',
+							type: 'instant',
 						},
 					])
 				}
