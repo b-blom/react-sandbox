@@ -17,27 +17,28 @@ export default function Arena() {
 	return (
 		<div>
 			<h2>arena</h2>
-			<div className='row flex-evenly'>
+			<div className='row flex-between'>
 				<div className='col'>
 					<h2>player1</h2>
 					<h3>Deck size: {JSON.stringify(player1Deck.length)}</h3>
 					<PlayerHand />
 				</div>
-				<div className='col black-border'>
+				<div className='col black-border' style={{ flexGrow: '1' }}>
 					<h2>battlefield</h2>
 					<div className='row'>
 						<div className='col'>
+							<h3>player 1 side</h3>
 							{player1BattlefieldMana.map((card, index) => {
 								if (card.type === 'mana') {
 									return <ManaCard card={card} key={index} />;
 								}
 								return 'no card type to render';
 							})}
-						</div>
-						<div className='col'>
-							{player1BattlefieldCreatures.map((card, index) => {
-								return <CreatureCard card={card} key={index} />;
-							})}
+							<div className='col'>
+								{player1BattlefieldCreatures.map((card, index) => {
+									return <CreatureCard card={card} key={index} />;
+								})}
+							</div>
 						</div>
 					</div>
 				</div>
