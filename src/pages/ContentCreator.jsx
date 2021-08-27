@@ -16,8 +16,6 @@ export default function ContentCreator() {
 					<InstantCardCreator />
 				</div>
 			</div>
-			{/*  <ViewCard />
-			 */}
 		</div>
 	);
 }
