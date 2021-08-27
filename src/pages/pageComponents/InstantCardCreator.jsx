@@ -144,7 +144,6 @@ export default function InstantCardCreator() {
 				</div>
 				<div className='black-border'>
 					{data.instantCards.map((instantCard, index) => {
-						console.log('instantCard', instantCard);
 						return (
 							<CreatureCard card={instantCard} key={index} deckCreator={true} />
 						);

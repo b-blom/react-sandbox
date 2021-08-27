@@ -10,11 +10,51 @@ import { DeckContext } from './context/DeckContext';
 export default function GameRouter() {
 	const [player1Deck, setPlayer1Deck] = useState([]);
 	const [player1Hand, setPlayer1Hand] = useState([]);
+	const [player1BattlefieldMana, setPlayer1BattlefieldMana] = useState([]);
 
 	return (
 		<DeckContext.Provider
-			value={{ player1Deck, setPlayer1Deck, player1Hand, setPlayer1Hand }}
+			value={{
+				player1Deck,
+				setPlayer1Deck,
+				player1Hand,
+				setPlayer1Hand,
+				player1BattlefieldMana,
+				setPlayer1BattlefieldMana,
+			}}
 		>
+			<button
+				onClick={() =>
+					setPlayer1Deck([
+						{
+							__typename: 'ManaCard',
+							image: '🔥',
+							name: 'Fire',
+							type: 'mana',
+						},
+						{
+							__typename: 'ManaCard',
+							image: '🔥',
+							name: 'Fire',
+							type: 'mana',
+						},
+						{
+							__typename: 'ManaCard',
+							image: '🔥',
+							name: 'Fire',
+							type: 'mana',
+						},
+						{
+							__typename: 'ManaCard',
+							image: '🔥',
+							name: 'Fire',
+							type: 'mana',
+						},
+					])
+				}
+			>
+				set dummy deck
+			</button>
 			<Router>
 				<ul
 					style={{

@@ -2,11 +2,16 @@ import React, { useContext } from 'react';
 import { DeckContext } from '../../../context/DeckContext';
 
 export default function PlayerHand() {
-	const { player1Deck, setPlayer1Deck, player1Hand, setPlayer1Hand } =
-		useContext(DeckContext);
+	const {
+		player1Deck,
+		setPlayer1Deck,
+		player1Hand,
+		setPlayer1Hand,
+		player1BattlefieldMana,
+		setPlayer1BattlefieldMana,
+	} = useContext(DeckContext);
 
 	async function drawCard() {
-		console.log('drawCard start');
 		// get a random number which represent which card to draw from the deck
 		const randomNumber = Math.floor(Math.random() * player1Deck.length);
 
@@ -19,10 +24,8 @@ export default function PlayerHand() {
 		let newDeck = [...player1Deck];
 		newDeck.splice(randomNumber, 1);
 		setPlayer1Deck(newDeck);
-		console.log('drawCard end');
 	}
 
-	console.log('player1Hand', player1Hand);
 	return (
 		<div>
 			<h3>player 1 hand</h3>
@@ -41,6 +44,7 @@ export default function PlayerHand() {
 						<th>name</th>
 						<th>image</th>
 						<th>type</th>
+						<th>summon</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,6 +54,25 @@ export default function PlayerHand() {
 								<td>{card.name}</td>
 								<td>{card.image}</td>
 								<td>{card.type}</td>
+								<td>
+									<button
+										onClick={() => {
+											console.log('summon to battlefield', card);
+
+											// add card to battlefield
+											let newBattleFieldMana = [...player1BattlefieldMana];
+											newBattleFieldMana.push(card);
+											setPlayer1BattlefieldMana(newBattleFieldMana);
+
+											//remove card from player hand
+											let newPlayerHand = [...player1Hand];
+											newPlayerHand.splice(index, 1);
+											setPlayer1Hand(newPlayerHand);
+										}}
+									>
+										summon
+									</button>
+								</td>
 							</tr>
 						);
 					})}

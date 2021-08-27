@@ -48,7 +48,6 @@ export default function DeckCreator() {
 
 	if (loading) return <h2>loading</h2>;
 	if (error) return <h2>ERROR</h2>;
-	console.log('deckCreator', data);
 	return (
 		<div className='row'>
 			<div className='col black-border' style={{ width: '30%' }}>

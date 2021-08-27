@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { DeckContext } from '../context/DeckContext';
 import PlayerHand from './cards/renderComponents/PlayerHand';
+import ManaCard from './cards/ManaCard';
 
 export default function Arena() {
-	const { player1Deck, setPlayer1Deck } = useContext(DeckContext);
-
-	const [drawedCard, setDrawedCard] = useState('draw a care');
+	const {
+		player1Deck,
+		setPlayer1Deck,
+		player1BattlefieldMana,
+		setPlayer1BattlefieldMana,
+	} = useContext(DeckContext);
 
 	return (
 		<div>
@@ -13,26 +17,16 @@ export default function Arena() {
 			<div className='row flex-evenly'>
 				<div className='col'>
 					<h2>player1</h2>
+					<h3>Deck size: {JSON.stringify(player1Deck.length)}</h3>
 					<PlayerHand />
 				</div>
-				<div className='col'>
-					<h3>number of cards in deck {JSON.stringify(player1Deck.length)}</h3>
-					<button
-						onClick={() => {
-							const randomNumber = Math.floor(
-								Math.random() * player1Deck.length
-							);
-
-							setDrawedCard(player1Deck[randomNumber]);
-							const newArray = [...player1Deck];
-							newArray.splice(randomNumber, 1);
-							setPlayer1Deck(newArray);
-						}}
-					>
-						draw card
-					</button>
-					<h3>drawed card</h3>
-					<pre>{JSON.stringify(drawedCard)}</pre>
+				<div className='col black-border'>
+					<h2>battlefield</h2>
+					<div className='col'>
+						{player1BattlefieldMana.map((card, index) => {
+							return <ManaCard card={card} key={index} />;
+						})}
+					</div>
 				</div>
 			</div>
 		</div>

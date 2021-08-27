@@ -15,6 +15,7 @@ export default function ContentCreator() {
 				<div className='black-border'>
 					<InstantCardCreator />
 				</div>
+				{/* implement SorceryCardCreator */}
 			</div>
 		</div>
 	);
