@@ -12,6 +12,8 @@ export default function GameRouter() {
 	const [player1Deck, setPlayer1Deck] = useState([]);
 	const [player1Hand, setPlayer1Hand] = useState([]);
 	const [player1BattlefieldMana, setPlayer1BattlefieldMana] = useState([]);
+	const [player1BattlefieldInstant, setPlayer1BattlefieldInstant] =
+		useState(null);
 	const [player1BattlefieldCreatures, setPlayer1BattlefieldCreatures] =
 		useState([]);
 
@@ -27,6 +29,8 @@ export default function GameRouter() {
 				setPlayer1Hand,
 				player1BattlefieldMana,
 				setPlayer1BattlefieldMana,
+				player1BattlefieldInstant,
+				setPlayer1BattlefieldInstant,
 				player1BattlefieldCreatures,
 				setPlayer1BattlefieldCreatures,
 
@@ -45,6 +49,7 @@ export default function GameRouter() {
 							borderBottom: '3px solid black',
 						}}
 					>
+						{/* TODO: create a playable dummy deck */}
 						<button
 							onClick={() =>
 								setPlayer1Deck([

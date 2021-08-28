@@ -52,6 +52,7 @@
 
 .black-border {
 	border: 2px solid black;
+	border-radius: 15px;
 	padding: 5px;
 	margin: 3px;
 }
@@ -136,6 +137,7 @@
 
 .battlefield-player-wrapper {
 	border: 2px solid blueviolet;
+	border-radius: 15px;
 	flex: 1;
 	margin: 5px;
 }

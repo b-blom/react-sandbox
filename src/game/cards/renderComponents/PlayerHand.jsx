@@ -3,6 +3,8 @@ import { DeckContext } from '../../../context/DeckContext';
 
 export default function PlayerHand() {
 	const {
+		player1Hp,
+		setPlayer1Hp,
 		player1Deck,
 		setPlayer1Deck,
 		player1Hand,
@@ -11,6 +13,9 @@ export default function PlayerHand() {
 		setPlayer1BattlefieldMana,
 		player1BattlefieldCreatures,
 		setPlayer1BattlefieldCreatures,
+
+		player2Hp,
+		setPlayer2Hp,
 	} = useContext(DeckContext);
 
 	async function drawCard() {
@@ -84,19 +89,33 @@ export default function PlayerHand() {
 											}
 
 											if (card.type === 'creature') {
+												// add card to battlefield
 												let newBattlefieldCreatures = [
 													...player1BattlefieldCreatures,
 												];
 												newBattlefieldCreatures.push(card);
 												setPlayer1BattlefieldCreatures(newBattlefieldCreatures);
 
+												// remove card from player hand
 												let newPlayerHand = [...player1Hand];
 												newPlayerHand.splice(index, 1);
 												setPlayer1Hand(newPlayerHand);
 											}
 
 											if (card.type === 'instant') {
-												alert('used instant card ' + card.name);
+												if (card.damage > 0) {
+													const player = 'player1'; // TODO: refactor to get player value as prop
+													if (player === 'player1') {
+														let newHp = player2Hp;
+														newHp = newHp - card.damage;
+														setPlayer2Hp(newHp);
+													}
+													// TODO: add deal damage to player1
+												}
+												// instants are never summoned to battlefield,
+												// so we will handle instant effect here
+
+												// remove card from player hand
 												let newPlayerHand = [...player1Hand];
 												newPlayerHand.splice(index, 1);
 												setPlayer1Hand(newPlayerHand);

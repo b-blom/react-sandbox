@@ -11,6 +11,8 @@ export default function Arena() {
 		player1Deck,
 		setPlayer1Deck,
 		player1BattlefieldMana,
+		player1BattlefieldInstant,
+		setPlayer1BattlefieldInstant,
 		setPlayer1BattlefieldMana,
 		player1BattlefieldCreatures,
 		setPlayer1BattlefieldCreatures,
@@ -36,6 +38,7 @@ export default function Arena() {
 	return (
 		<div className='arena'>
 			<h2>arena</h2>
+			{/* TODO: Add an action log  */}
 			<div className='col flex-grow full-height'>
 				<div className='row flex-between '>
 					<div className='col '>
@@ -54,8 +57,8 @@ export default function Arena() {
 							<h4>
 								p1 hp: <span style={{ fontSize: '20px' }}>{player1Hp}</span>
 							</h4>
-							<h2>battlefield</h2>
-
+							<h2>battlefield</h2>{' '}
+							{/* TODO: add or replace with actionMessage */}
 							<h4>
 								<span style={{ fontSize: '20px' }}>{player2Hp}</span> :p2 hp
 							</h4>
