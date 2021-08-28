@@ -4,10 +4,8 @@ import GameRouter from './GameRouter';
 
 function App() {
 	return (
-		<div className='App'>
+		<div className='App full-height'>
 			<GameRouter />
-
-			<header className='App-header'></header>
 		</div>
 	);
 }

@@ -14,6 +14,10 @@ export default function PlayerHand() {
 	} = useContext(DeckContext);
 
 	async function drawCard() {
+		if (player1Deck.length <= 0) {
+			console.log('player1Deck is empty');
+			return;
+		}
 		// get a random number which represent which card to draw from the deck
 		const randomNumber = Math.floor(Math.random() * player1Deck.length);
 
@@ -30,14 +34,14 @@ export default function PlayerHand() {
 
 	return (
 		<div>
-			<h3>player 1 hand</h3>
+			<h3>Hand</h3>
 			<div className='row'>
 				<button
 					onClick={() => {
 						drawCard();
 					}}
 				>
-					draw single card
+					draw card
 				</button>
 			</div>
 			<table>

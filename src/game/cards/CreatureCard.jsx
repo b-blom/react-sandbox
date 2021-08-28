@@ -90,7 +90,7 @@ export default function CreatureCard(props) {
 							setBig(true);
 						}}
 					>
-						open menu
+						menu
 					</button>
 				)
 			) : null}

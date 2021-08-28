@@ -26,114 +26,152 @@ export default function GameRouter() {
 				setPlayer1BattlefieldCreatures,
 			}}
 		>
-			<button
-				onClick={() =>
-					setPlayer1Deck([
-						{
-							__typename: 'ManaCard',
-							image: '🔥',
-							name: 'Fire',
-							type: 'mana',
-						},
-						{
-							__typename: 'ManaCard',
-							image: '🧊',
-							name: 'Ice',
-							type: 'mana',
-						},
-						{
-							__typename: 'ManaCard',
-							image: '🧊',
-							name: 'Ice',
-							type: 'mana',
-						},
-						{
-							__typename: 'ManaCard',
-							image: '🌍',
-							name: 'Earth',
-							type: 'mana',
-						},
-						{
-							__typename: 'ManaCard',
-							image: '🌍',
-							name: 'Earth',
-							type: 'mana',
-						},
-						{
-							__typename: 'ManaCard',
-							image: '🌌',
-							name: 'Space',
-							type: 'mana',
-						},
-						{
-							__typename: 'ManaCard',
-							image: '🌌',
-							name: 'Space',
-							type: 'mana',
-						},
-						{
-							__typename: 'CreatureCard',
-							ability: 'poop',
-							abilityCost: 1,
-							abilityDescription:
-								'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
-							defense: 1,
-							image: '🐦',
-							name: 'bird',
-							strength: 1,
-							type: 'creature',
-						},
-						{
-							__typename: 'InstantCard',
-							cost: 1,
-							damage: 3,
-							defense: 0,
-							description: '3 damage to anything',
-							image: '⚡',
-							name: 'bolt',
-							type: 'instant',
-						},
-						{
-							__typename: 'InstantCard',
-							cost: 1,
-							damage: 3,
-							defense: 0,
-							description: '3 damage to anything',
-							image: '⚡',
-							name: 'bolt',
-							type: 'instant',
-						},
-					])
-				}
-			>
-				set dummy deck
-			</button>
 			<Router>
-				<ul
-					style={{
-						display: 'flex',
-						flexDirection: 'row',
-						justifyContent: 'space-around',
-						padding: '15px',
-						borderBottom: '3px solid black',
-					}}
-				>
-					<li>
-						<Link to='/'>Home</Link>
-					</li>
-					<li>
-						<Link to='/createcards'>Create card</Link>
-					</li>
-					<li>
-						<Link to='/createdeck'>Create deck</Link>
-					</li>
-					<li>
-						<Link to='/arena'>Arena</Link>
-					</li>
-					<li>
-						<Link to='/game'>Play field</Link>
-					</li>
-				</ul>
+				<div style={{ height: '55px' }}>
+					<ul
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-around',
+							padding: '15px',
+							borderBottom: '3px solid black',
+						}}
+					>
+						<button
+							onClick={() =>
+								setPlayer1Deck([
+									{
+										__typename: 'ManaCard',
+										image: '🔥',
+										name: 'Fire',
+										type: 'mana',
+									},
+									{
+										__typename: 'ManaCard',
+										image: '🧊',
+										name: 'Ice',
+										type: 'mana',
+									},
+									{
+										__typename: 'ManaCard',
+										image: '🧊',
+										name: 'Ice',
+										type: 'mana',
+									},
+									{
+										__typename: 'ManaCard',
+										image: '🌍',
+										name: 'Earth',
+										type: 'mana',
+									},
+									{
+										__typename: 'ManaCard',
+										image: '🌍',
+										name: 'Earth',
+										type: 'mana',
+									},
+									{
+										__typename: 'ManaCard',
+										image: '🌌',
+										name: 'Space',
+										type: 'mana',
+									},
+									{
+										__typename: 'ManaCard',
+										image: '🌌',
+										name: 'Space',
+										type: 'mana',
+									},
+									{
+										__typename: 'CreatureCard',
+										ability: 'poop',
+										abilityCost: 1,
+										abilityDescription:
+											'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
+										defense: 1,
+										image: '🐦',
+										name: 'bird',
+										strength: 1,
+										type: 'creature',
+									},
+									{
+										__typename: 'CreatureCard',
+										ability: 'poop',
+										abilityCost: 1,
+										abilityDescription:
+											'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
+										defense: 1,
+										image: '🐦',
+										name: 'bird',
+										strength: 1,
+										type: 'creature',
+									},
+									{
+										__typename: 'CreatureCard',
+										ability: 'poop',
+										abilityCost: 1,
+										abilityDescription:
+											'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
+										defense: 1,
+										image: '🐦',
+										name: 'bird',
+										strength: 1,
+										type: 'creature',
+									},
+									{
+										__typename: 'CreatureCard',
+										ability: 'poop',
+										abilityCost: 1,
+										abilityDescription:
+											'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
+										defense: 1,
+										image: '🐦',
+										name: 'bird',
+										strength: 1,
+										type: 'creature',
+									},
+									{
+										__typename: 'InstantCard',
+										cost: 1,
+										damage: 3,
+										defense: 0,
+										description: '3 damage to anything',
+										image: '⚡',
+										name: 'bolt',
+										type: 'instant',
+									},
+									{
+										__typename: 'InstantCard',
+										cost: 1,
+										damage: 3,
+										defense: 0,
+										description: '3 damage to anything',
+										image: '⚡',
+										name: 'bolt',
+										type: 'instant',
+									},
+								])
+							}
+						>
+							set dummy deck
+						</button>
+						<li>
+							<Link to='/'>Home</Link>
+						</li>
+						<li>
+							<Link to='/createcards'>Create card</Link>
+						</li>
+						<li>
+							<Link to='/createdeck'>Create deck</Link>
+						</li>
+						<li>
+							<Link to='/arena'>Arena</Link>
+						</li>
+						<li>
+							<Link to='/game'>Play field</Link>
+						</li>
+					</ul>
+				</div>
 				<Switch>
 					<Route exact path='/'>
 						<Home />
