@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { DeckContext } from '../../../context/DeckContext';
 
-export default function PlayerHand() {
+export default function PlayerHand(props) {
 	const {
 		player1Hp,
 		setPlayer1Hp,
@@ -46,90 +46,114 @@ export default function PlayerHand() {
 			style={{
 				marginTop: '5px',
 				paddingTop: '10px',
+				marginBottom: '5px',
+				paddingBottom: '25px',
 				borderTop: '3px solid gray',
+				borderBottom: '3px solid gray',
 				borderRadius: '30px',
 			}}
 		>
-			<button
-				onClick={() => {
-					drawCard();
-				}}
-			>
-				draw card
-			</button>
-			<table>
-				<thead>
-					<tr>
-						<th>name</th>
-						<th>image</th>
-						<th>type</th>
-						<th>summon</th>
-					</tr>
-				</thead>
-				<tbody>
-					{player1Hand.map((card, index) => {
-						return (
-							<tr key={index}>
-								<td style={{ textAlign: 'end' }}>{card.name}</td>
-								<td>{card.image}</td>
-								<td>{card.type}</td>
-								<td>
-									<button
-										onClick={() => {
-											if (card.type === 'mana') {
-												// add card to battlefield
-												let newBattleFieldMana = [...player1BattlefieldMana];
-												newBattleFieldMana.push(card);
-												setPlayer1BattlefieldMana(newBattleFieldMana);
-
-												//remove card from player hand
-												let newPlayerHand = [...player1Hand];
-												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
-											}
-
-											if (card.type === 'creature') {
-												// add card to battlefield
-												let newBattlefieldCreatures = [
-													...player1BattlefieldCreatures,
-												];
-												newBattlefieldCreatures.push(card);
-												setPlayer1BattlefieldCreatures(newBattlefieldCreatures);
-
-												// remove card from player hand
-												let newPlayerHand = [...player1Hand];
-												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
-											}
-
-											if (card.type === 'instant') {
-												if (card.damage > 0) {
-													const player = 'player1'; // TODO: refactor to get player value as prop
-													if (player === 'player1') {
-														let newHp = player2Hp;
-														newHp = newHp - card.damage;
-														setPlayer2Hp(newHp);
-													}
-													// TODO: add deal damage to player1
-												}
-												// instants are never summoned to battlefield,
-												// so we will handle instant effect here
-
-												// remove card from player hand
-												let newPlayerHand = [...player1Hand];
-												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
-											}
-										}}
-									>
-										summon
-									</button>
-								</td>
+			<h2 className='margin-t-b-2'>{props.player}</h2>
+			{props.underConstruction ? (
+				<h5>Under construction</h5>
+			) : (
+				<div>
+					{' '}
+					{/* Remove this div when construction complete */}
+					<h3 className='margin-t-b-2'>
+						Deck size: {JSON.stringify(player1Deck.length)}
+					</h3>
+					<hr
+						style={{
+							width: '90%',
+						}}
+					/>
+					<button
+						onClick={() => {
+							drawCard();
+						}}
+					>
+						draw card
+					</button>
+					<table>
+						<thead>
+							<tr>
+								<th>name</th>
+								<th>image</th>
+								<th>type</th>
+								<th>summon</th>
 							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+						</thead>
+						<tbody>
+							{player1Hand.map((card, index) => {
+								return (
+									<tr key={index}>
+										<td style={{ textAlign: 'end' }}>{card.name}</td>
+										<td>{card.image}</td>
+										<td>{card.type}</td>
+										<td>
+											<button
+												onClick={() => {
+													if (card.type === 'mana') {
+														// add card to battlefield
+														let newBattleFieldMana = [
+															...player1BattlefieldMana,
+														];
+														newBattleFieldMana.push(card);
+														setPlayer1BattlefieldMana(newBattleFieldMana);
+
+														//remove card from player hand
+														let newPlayerHand = [...player1Hand];
+														newPlayerHand.splice(index, 1);
+														setPlayer1Hand(newPlayerHand);
+													}
+
+													if (card.type === 'creature') {
+														// add card to battlefield
+														let newBattlefieldCreatures = [
+															...player1BattlefieldCreatures,
+														];
+														newBattlefieldCreatures.push(card);
+														setPlayer1BattlefieldCreatures(
+															newBattlefieldCreatures
+														);
+
+														// remove card from player hand
+														let newPlayerHand = [...player1Hand];
+														newPlayerHand.splice(index, 1);
+														setPlayer1Hand(newPlayerHand);
+													}
+
+													if (card.type === 'instant') {
+														if (card.damage > 0) {
+															const player = 'player1'; // TODO: refactor to get player value as prop
+															if (player === 'player1') {
+																let newHp = player2Hp;
+																newHp = newHp - card.damage;
+																setPlayer2Hp(newHp);
+															}
+															// TODO: add deal damage to player1
+														}
+														// instants are never summoned to battlefield,
+														// so we will handle instant effect here
+
+														// remove card from player hand
+														let newPlayerHand = [...player1Hand];
+														newPlayerHand.splice(index, 1);
+														setPlayer1Hand(newPlayerHand);
+													}
+												}}
+											>
+												summon
+											</button>
+										</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</div>
+			)}
 		</div>
 	);
 }

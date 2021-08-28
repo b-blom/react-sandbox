@@ -6,6 +6,9 @@ import CreatureCard from './cards/CreatureCardV2';
 
 export default function Arena() {
 	const {
+		activePlayer,
+		setActivePlayer,
+
 		player1Hp,
 		setPlayer1Hp,
 		player1Deck,
@@ -20,6 +23,9 @@ export default function Arena() {
 		player2Hp,
 		setPlayer2Hp,
 	} = useContext(DeckContext);
+
+	const [hidePlayer1, setHidePlayer1] = useState(false);
+	const [hidePlayer2, setHidePlayer2] = useState(false);
 
 	const dealDamage = (player, damage) => {
 		console.log('p2hp', player2Hp);
@@ -38,15 +44,42 @@ export default function Arena() {
 	return (
 		<div className='arena'>
 			<h2>arena</h2>
+			<button
+				onClick={() => {
+					if (activePlayer === 'player1') {
+						setActivePlayer('player2');
+					} else {
+						setActivePlayer('player1');
+					}
+					setHidePlayer1(false);
+					setHidePlayer2(false);
+				}}
+			>
+				Toggle active player
+			</button>
 			{/* TODO: Add an action log  */}
 			<div className='col flex-grow full-height'>
 				<div className='row flex-between '>
-					<div className='col '>
-						<h2 className='margin-t-b-2'>player1</h2>
-						<h3 className='margin-t-b-2'>
-							Deck size: {JSON.stringify(player1Deck.length)}
-						</h3>
-						<PlayerHand />
+					<div id='player-1-hand-wrapper'>
+						{activePlayer === 'player1' && (
+							<button
+								onClick={() => {
+									setHidePlayer1(!hidePlayer1);
+								}}
+							>
+								{hidePlayer1 ? 'show hand' : 'hide hand'}{' '}
+							</button>
+						)}
+						<div
+							className='col'
+							style={
+								activePlayer === 'player1' && !hidePlayer1
+									? null
+									: { display: 'none' }
+							}
+						>
+							<PlayerHand player='player1' opponent='player2' />
+						</div>
 					</div>
 					<div
 						id='battlefield-main-window'
@@ -97,7 +130,33 @@ export default function Arena() {
 							</div>
 							<div className='battlefield-player-wrapper'>
 								<h3>player 2 side</h3>
+								<h4>player 2 summoned cards go here</h4>
 							</div>
+						</div>
+					</div>
+					<div id='player-2-hand-wrapper'>
+						{activePlayer === 'player2' && (
+							<button
+								onClick={() => {
+									setHidePlayer2(!hidePlayer2);
+								}}
+							>
+								{hidePlayer2 ? 'show hand' : 'hide hand'}
+							</button>
+						)}
+						<div
+							className='col'
+							style={
+								activePlayer === 'player2' && !hidePlayer2
+									? null
+									: { display: 'none' }
+							}
+						>
+							<PlayerHand
+								player='player2'
+								opponent='player1'
+								underConstruction={true}
+							/>
 						</div>
 					</div>
 				</div>

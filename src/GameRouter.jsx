@@ -8,6 +8,8 @@ import Arena from './game/Arena';
 import { DeckContext } from './context/DeckContext';
 
 export default function GameRouter() {
+	const [activePlayer, setActivePlayer] = useState('player1');
+
 	const [player1Hp, setPlayer1Hp] = useState(20);
 	const [player1Deck, setPlayer1Deck] = useState([]);
 	const [player1Hand, setPlayer1Hand] = useState([]);
@@ -21,6 +23,9 @@ export default function GameRouter() {
 	return (
 		<DeckContext.Provider
 			value={{
+				activePlayer,
+				setActivePlayer,
+
 				player1Hp,
 				setPlayer1Hp,
 				player1Deck,
