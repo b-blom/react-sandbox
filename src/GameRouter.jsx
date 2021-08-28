@@ -8,14 +8,19 @@ import Arena from './game/Arena';
 import { DeckContext } from './context/DeckContext';
 
 export default function GameRouter() {
+	const [player1Hp, setPlayer1Hp] = useState(20);
 	const [player1Deck, setPlayer1Deck] = useState([]);
 	const [player1Hand, setPlayer1Hand] = useState([]);
 	const [player1BattlefieldMana, setPlayer1BattlefieldMana] = useState([]);
 	const [player1BattlefieldCreatures, setPlayer1BattlefieldCreatures] =
 		useState([]);
+
+	const [player2Hp, setPlayer2Hp] = useState(20);
 	return (
 		<DeckContext.Provider
 			value={{
+				player1Hp,
+				setPlayer1Hp,
 				player1Deck,
 				setPlayer1Deck,
 				player1Hand,
@@ -24,6 +29,9 @@ export default function GameRouter() {
 				setPlayer1BattlefieldMana,
 				player1BattlefieldCreatures,
 				setPlayer1BattlefieldCreatures,
+
+				player2Hp,
+				setPlayer2Hp,
 			}}
 		>
 			<Router>
@@ -54,26 +62,8 @@ export default function GameRouter() {
 									},
 									{
 										__typename: 'ManaCard',
-										image: '🧊',
-										name: 'Ice',
-										type: 'mana',
-									},
-									{
-										__typename: 'ManaCard',
 										image: '🌍',
 										name: 'Earth',
-										type: 'mana',
-									},
-									{
-										__typename: 'ManaCard',
-										image: '🌍',
-										name: 'Earth',
-										type: 'mana',
-									},
-									{
-										__typename: 'ManaCard',
-										image: '🌌',
-										name: 'Space',
 										type: 'mana',
 									},
 									{

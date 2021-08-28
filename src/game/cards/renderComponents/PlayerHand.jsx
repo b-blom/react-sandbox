@@ -15,7 +15,11 @@ export default function PlayerHand() {
 
 	async function drawCard() {
 		if (player1Deck.length <= 0) {
-			console.log('player1Deck is empty');
+			alert('player1Deck is empty');
+			return;
+		}
+		if (player1Hand.length >= 10) {
+			alert('player1Hand is full');
 			return;
 		}
 		// get a random number which represent which card to draw from the deck
@@ -33,17 +37,21 @@ export default function PlayerHand() {
 	}
 
 	return (
-		<div>
-			<h3>Hand</h3>
-			<div className='row'>
-				<button
-					onClick={() => {
-						drawCard();
-					}}
-				>
-					draw card
-				</button>
-			</div>
+		<div
+			style={{
+				marginTop: '5px',
+				paddingTop: '10px',
+				borderTop: '3px solid gray',
+				borderRadius: '30px',
+			}}
+		>
+			<button
+				onClick={() => {
+					drawCard();
+				}}
+			>
+				draw card
+			</button>
 			<table>
 				<thead>
 					<tr>
@@ -57,7 +65,7 @@ export default function PlayerHand() {
 					{player1Hand.map((card, index) => {
 						return (
 							<tr key={index}>
-								<td>{card.name}</td>
+								<td style={{ textAlign: 'end' }}>{card.name}</td>
 								<td>{card.image}</td>
 								<td>{card.type}</td>
 								<td>
@@ -103,13 +111,6 @@ export default function PlayerHand() {
 					})}
 				</tbody>
 			</table>
-			{/* Render cards and use ifs to decide which components to render (<InstantCard/> for intstant cards etc) */}
-			{/* <div className='row'>
-				{player1Hand &&
-					player1Hand.map((card) => {
-						return <p>{card.name}</p>;
-					})}
-			</div> */}
 		</div>
 	);
 }

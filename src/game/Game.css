@@ -1,11 +1,21 @@
 .arena {
 	display: flex;
 	flex-direction: column;
+	height: 1000px;
+}
+
+#battlefield-header {
+	justify-content: space-between;
 }
 
 .flex-grow {
 	flex-grow: 1;
 }
+
+.flex-stretch {
+	align-items: stretch;
+}
+
 .full-height {
 	height: 100%;
 }
@@ -29,6 +39,15 @@
 
 .flex-evenly {
 	justify-content: space-evenly;
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.margin-t-b-2 {
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
 
 .black-border {
@@ -113,4 +132,10 @@
 	border: 2px solid tomato;
 	margin: 5px;
 	justify-content: flex-start;
+}
+
+.battlefield-player-wrapper {
+	border: 2px solid blueviolet;
+	flex: 1;
+	margin: 5px;
 }
