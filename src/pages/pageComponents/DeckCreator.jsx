@@ -38,6 +38,8 @@ const CARDS_QUERY = gql`
 export default function DeckCreator() {
 	const { player1Deck, setPlayer1Deck } = useContext(DeckContext);
 
+	// TODO: create player 2 dech and add cards to player 2 deck
+
 	const { data, loading, error } = useQuery(CARDS_QUERY);
 
 	const addToDeck = (card) => {
