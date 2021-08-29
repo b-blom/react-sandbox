@@ -20,6 +20,13 @@ export default function GameRouter() {
 		useState([]);
 
 	const [player2Hp, setPlayer2Hp] = useState(20);
+	const [player2Deck, setPlayer2Deck] = useState([]);
+	const [player2Hand, setPlayer2Hand] = useState([]);
+	const [player2BattlefieldMana, setPlayer2BattlefieldMana] = useState([]);
+	const [player2BattlefieldInstant, setPlayer2BattlefieldInstant] =
+		useState(null);
+	const [player2BattlefieldCreatures, setPlayer2BattlefieldCreatures] =
+		useState([]);
 	return (
 		<DeckContext.Provider
 			value={{
@@ -41,6 +48,16 @@ export default function GameRouter() {
 
 				player2Hp,
 				setPlayer2Hp,
+				player2Deck,
+				setPlayer2Deck,
+				player2Hand,
+				setPlayer2Hand,
+				player2BattlefieldMana,
+				setPlayer2BattlefieldMana,
+				player2BattlefieldInstant,
+				setPlayer2BattlefieldInstant,
+				player2BattlefieldCreatures,
+				setPlayer2BattlefieldCreatures,
 			}}
 		>
 			<Router>
@@ -56,8 +73,8 @@ export default function GameRouter() {
 					>
 						{/* TODO: create a playable dummy deck */}
 						<button
-							onClick={() =>
-								setPlayer1Deck([
+							onClick={() => {
+								const dummyDeck = [
 									{
 										__typename: 'ManaCard',
 										image: '🔥',
@@ -150,8 +167,10 @@ export default function GameRouter() {
 										name: 'bolt',
 										type: 'instant',
 									},
-								])
-							}
+								];
+								setPlayer1Deck(dummyDeck);
+								setPlayer2Deck(dummyDeck);
+							}}
 						>
 							set dummy deck
 						</button>

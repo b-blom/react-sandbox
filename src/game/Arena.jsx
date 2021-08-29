@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { DeckContext } from '../context/DeckContext';
-import PlayerHand from './cards/renderComponents/PlayerHand';
+import Player1Hand from './cards/renderComponents/Player1Hand';
+import Player2Hand from './cards/renderComponents/Player2Hand';
 import ManaCard from './cards/ManaCard';
 import CreatureCard from './cards/CreatureCardV2';
 
@@ -22,6 +23,14 @@ export default function Arena() {
 
 		player2Hp,
 		setPlayer2Hp,
+		player2Deck,
+		setPlayer2Deck,
+		player2BattlefieldMana,
+		player2BattlefieldInstant,
+		setPlayer2BattlefieldInstant,
+		setPlayer2BattlefieldMana,
+		player2BattlefieldCreatures,
+		setPlayer2BattlefieldCreatures,
 	} = useContext(DeckContext);
 
 	const [hidePlayer1, setHidePlayer1] = useState(false);
@@ -29,20 +38,17 @@ export default function Arena() {
 
 	const dealDamage = (player, damage) => {
 		console.log('p2hp', player2Hp);
-		if ((player = 'player1')) {
+		if (player === 'player1') {
 			let newHp = player2Hp;
 			newHp = newHp - damage;
 			setPlayer2Hp(newHp);
 		}
-		if ((player = 'player2')) {
+		if (player === 'player2') {
 			let newHp = player1Hp;
 			newHp = newHp - damage;
 			setPlayer1Hp(newHp);
 		}
 	};
-
-	if (player1Hp <= 0) return <h2>Player 2 wins!</h2>;
-	if (player2Hp <= 0) return <h2>Player 1 wins!</h2>;
 
 	return (
 		<div className='arena game-wrapper'>
@@ -82,7 +88,7 @@ export default function Arena() {
 									: { display: 'none' }
 							}
 						>
-							<PlayerHand player='player1' opponent='player2' />
+							<Player1Hand player='player1' opponent='player2' />
 						</div>
 					</div>
 					<div
@@ -100,43 +106,84 @@ export default function Arena() {
 								<span style={{ fontSize: '20px' }}>{player2Hp}</span> :p2 hp
 							</h4>
 						</div>
-						<div className='row'>
-							<div className='battlefield-player-wrapper'>
-								<h3>player 1 side</h3>
-								<div className='col'>
-									{' '}
-									{/* Refactor height constraint to something better */}
-									<div className='row'>
-										<div className='col'>
-											{player1BattlefieldMana.map((card, index) => {
-												if (card.type === 'mana') {
+						{player1Hp <= 0 && <h1>PLAYER 2 wins</h1>}
+						{player2Hp <= 0 && <h1>PLAYER 1 wins</h1>}
+						{player1Hp > 0 && player2Hp > 0 && (
+							<div className='row'>
+								<div className='battlefield-player-wrapper'>
+									<h3>player 1 side</h3>
+									<div className='col'>
+										{/* Refactor height constraint to something better */}
+										<div className='row'>
+											<div className='col'>
+												{player1BattlefieldMana.map((card, index) => {
+													if (card.type === 'mana') {
+														return (
+															<ManaCard
+																card={card}
+																key={index}
+																summoned={true}
+															/>
+														);
+													}
+													return 'no card type to render';
+												})}
+											</div>
+											<div className='row flex-wrap'>
+												{player1BattlefieldCreatures.map((card, index) => {
 													return (
-														<ManaCard card={card} key={index} summoned={true} />
+														<CreatureCard
+															card={card}
+															key={index}
+															summoned={true}
+															attack={() =>
+																dealDamage('player1', card.strength)
+															}
+														/>
 													);
-												}
-												return 'no card type to render';
-											})}
+												})}
+											</div>
 										</div>
-										<div className='row flex-wrap'>
-											{player1BattlefieldCreatures.map((card, index) => {
-												return (
-													<CreatureCard
-														card={card}
-														key={index}
-														summoned={true}
-														attack={() => dealDamage('player1', card.strength)}
-													/>
-												);
-											})}
+									</div>
+								</div>
+								<div className='battlefield-player-wrapper'>
+									<h3>player 2 side</h3>
+									<div className='col'>
+										{/* Refactor height constraint to something better */}
+										<div className='row-reverse'>
+											<div className='col'>
+												{player2BattlefieldMana.map((card, index) => {
+													if (card.type === 'mana') {
+														return (
+															<ManaCard
+																card={card}
+																key={index}
+																summoned={true}
+															/>
+														);
+													}
+													return 'no card type to render';
+												})}
+											</div>
+											<div className='row flex-wrap'>
+												{player2BattlefieldCreatures.map((card, index) => {
+													return (
+														<CreatureCard
+															card={card}
+															key={index}
+															summoned={true}
+															attack={() =>
+																dealDamage('player2', card.strength)
+															}
+														/>
+													);
+												})}
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div className='battlefield-player-wrapper'>
-								<h3>player 2 side</h3>
-								<h4>player 2 summoned cards go here</h4>
-							</div>
-						</div>
+						)}
 					</div>
 					<div id='player-2-hand-wrapper'>
 						{activePlayer === 'player2' && (
@@ -156,11 +203,7 @@ export default function Arena() {
 									: { display: 'none' }
 							}
 						>
-							<PlayerHand
-								player='player2'
-								opponent='player1'
-								underConstruction={true}
-							/>
+							<Player2Hand />
 						</div>
 					</div>
 				</div>

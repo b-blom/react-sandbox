@@ -126,13 +126,12 @@ export default function PlayerHand(props) {
 
 													if (card.type === 'instant') {
 														if (card.damage > 0) {
-															const player = 'player1'; // TODO: refactor to get player value as prop
+															const player = 'player1';
 															if (player === 'player1') {
 																let newHp = player2Hp;
 																newHp = newHp - card.damage;
 																setPlayer2Hp(newHp);
 															}
-															// TODO: add deal damage to player1
 														}
 														// instants are never summoned to battlefield,
 														// so we will handle instant effect here

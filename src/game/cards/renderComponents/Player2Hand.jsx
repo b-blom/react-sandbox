@@ -1,41 +1,41 @@
 import React, { useContext } from 'react';
 import { DeckContext } from '../../../context/DeckContext';
 
-export default function Player1Hand(props) {
+export default function Player2Hand(props) {
 	const {
 		player1Hp,
 		setPlayer1Hp,
-		player1Deck,
-		setPlayer1Deck,
-		player1Hand,
-		setPlayer1Hand,
-		player1BattlefieldMana,
-		setPlayer1BattlefieldMana,
-		player1BattlefieldCreatures,
-		setPlayer1BattlefieldCreatures,
 
 		player2Hp,
 		setPlayer2Hp,
+		player2Deck,
+		setPlayer2Deck,
+		player2Hand,
+		setPlayer2Hand,
+		player2BattlefieldMana,
+		setPlayer2BattlefieldMana,
+		player2BattlefieldCreatures,
+		setPlayer2BattlefieldCreatures,
 	} = useContext(DeckContext);
 
 	async function drawCard() {
-		if (player1Deck.length <= 0) {
-			alert('player1Deck is empty');
+		if (player2Deck.length <= 0) {
+			alert('player2Deck is empty');
 			return;
 		}
-		if (player1Hand.length >= 10) {
-			alert('player1Hand is full');
+		if (player2Hand.length >= 10) {
+			alert('player2Hand is full');
 			return;
 		}
-		const randomNumber = Math.floor(Math.random() * player1Deck.length);
+		const randomNumber = Math.floor(Math.random() * player2Deck.length);
 
-		let newHand = [...player1Hand];
-		newHand.push(player1Deck[randomNumber]);
-		setPlayer1Hand(newHand);
+		let newHand = [...player2Hand];
+		newHand.push(player2Deck[randomNumber]);
+		setPlayer2Hand(newHand);
 
-		let newDeck = [...player1Deck];
+		let newDeck = [...player2Deck];
 		newDeck.splice(randomNumber, 1);
-		setPlayer1Deck(newDeck);
+		setPlayer2Deck(newDeck);
 	}
 	return (
 		<div
@@ -51,7 +51,7 @@ export default function Player1Hand(props) {
 		>
 			<h2 className='margin-t-b-2'>{props.player}</h2>
 			<h3 className='margin-t-b-2'>
-				Deck size: {JSON.stringify(player1Deck.length)}
+				Deck size: {JSON.stringify(player2Deck.length)}
 			</h3>
 			<hr
 				style={{
@@ -75,7 +75,7 @@ export default function Player1Hand(props) {
 					</tr>
 				</thead>
 				<tbody>
-					{player1Hand.map((card, index) => {
+					{player2Hand.map((card, index) => {
 						return (
 							<tr key={index}>
 								<td style={{ textAlign: 'end' }}>{card.name}</td>
@@ -85,43 +85,43 @@ export default function Player1Hand(props) {
 									<button
 										onClick={() => {
 											if (card.type === 'mana') {
-												let newBattleFieldMana = [...player1BattlefieldMana];
+												let newBattleFieldMana = [...player2BattlefieldMana];
 												newBattleFieldMana.push(card);
-												setPlayer1BattlefieldMana(newBattleFieldMana);
+												setPlayer2BattlefieldMana(newBattleFieldMana);
 
-												let newPlayerHand = [...player1Hand];
+												let newPlayerHand = [...player2Hand];
 												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
+												setPlayer2Hand(newPlayerHand);
 											}
 
 											if (card.type === 'creature') {
 												let newBattlefieldCreatures = [
-													...player1BattlefieldCreatures,
+													...player2BattlefieldCreatures,
 												];
 												newBattlefieldCreatures.push(card);
-												setPlayer1BattlefieldCreatures(newBattlefieldCreatures);
+												setPlayer2BattlefieldCreatures(newBattlefieldCreatures);
 
-												let newPlayerHand = [...player1Hand];
+												let newPlayerHand = [...player2Hand];
 												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
+												setPlayer2Hand(newPlayerHand);
 											}
 
 											if (card.type === 'instant') {
 												if (card.damage > 0) {
-													const player = 'player1';
-													if (player === 'player1') {
-														let newHp = player2Hp;
+													const player = 'player2';
+													if (player === 'player2') {
+														let newHp = player1Hp;
 														newHp = newHp - card.damage;
-														setPlayer2Hp(newHp);
+														setPlayer1Hp(newHp);
 													}
 												}
 												// instants are never summoned to battlefield,
 												// so we will handle instant effect here
 
 												// remove card from player hand
-												let newPlayerHand = [...player1Hand];
+												let newPlayerHand = [...player2Hand];
 												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
+												setPlayer2Hand(newPlayerHand);
 											}
 										}}
 									>
