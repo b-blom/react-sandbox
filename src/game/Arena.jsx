@@ -41,10 +41,14 @@ export default function Arena() {
 		}
 	};
 
+	if (player1Hp <= 0) return <h2>Player 2 wins!</h2>;
+	if (player2Hp <= 0) return <h2>Player 1 wins!</h2>;
+
 	return (
-		<div className='arena'>
+		<div className='arena game-wrapper'>
 			<h2>arena</h2>
 			<button
+				style={{ width: '100px', margin: '0 auto' }}
 				onClick={() => {
 					if (activePlayer === 'player1') {
 						setActivePlayer('player2');
