@@ -36,7 +36,8 @@ const CARDS_QUERY = gql`
 `;
 
 export default function DeckCreator() {
-	const { player1Deck, setPlayer1Deck } = useContext(DeckContext);
+	const { player1Deck, setPlayer1Deck /* , player2Deck, setPlayer2Deck */ } =
+		useContext(DeckContext);
 
 	// TODO: create player 2 dech and add cards to player 2 deck
 
@@ -54,7 +55,7 @@ export default function DeckCreator() {
 		<div className='row'>
 			<div className='col black-border' style={{ width: '30%' }}>
 				<h4> Player deck</h4>
-				<RenderDeck />
+				<RenderDeck deckCreator={true} />
 			</div>
 			<div className='col'>
 				<div className='black-border'>
