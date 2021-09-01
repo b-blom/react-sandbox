@@ -61,7 +61,7 @@ export default function GameRouter() {
 			}}
 		>
 			<Router>
-				<div style={{ height: '55px' }}>
+				<div className='nav-bar'>
 					<ul
 						style={{
 							display: 'flex',

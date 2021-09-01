@@ -38,17 +38,7 @@ export default function Player2Hand(props) {
 		setPlayer2Deck(newDeck);
 	}
 	return (
-		<div
-			style={{
-				marginTop: '5px',
-				paddingTop: '10px',
-				marginBottom: '5px',
-				paddingBottom: '25px',
-				borderTop: '3px solid gray',
-				borderBottom: '3px solid gray',
-				borderRadius: '30px',
-			}}
-		>
+		<div className='player-hand'>
 			<h2 className='margin-t-b-2'>{props.player}</h2>
 			<h3 className='margin-t-b-2'>
 				Deck size: {JSON.stringify(player2Deck.length)}
@@ -59,6 +49,7 @@ export default function Player2Hand(props) {
 				}}
 			/>
 			<button
+				className='arena-button'
 				onClick={() => {
 					drawCard();
 				}}

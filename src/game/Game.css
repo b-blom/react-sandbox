@@ -2,10 +2,43 @@
 	display: flex;
 	flex-direction: column;
 	height: 1000px;
+	background-color: black;
+	color: white;
 }
 
+.arena-button {
+	background-color: grey;
+	color: white;
+	border-radius: 10px;
+	border: 2px solid silver;
+}
+
+.nav-bar {
+	height: 55px;
+	background-color: black;
+	color: white;
+}
+
+.image-background {
+	background-image: url('../nasa-1.jpg');
+	background-size: cover;
+}
+
+.battlefield-content {
+	color: inherit;
+	opacity: 100%;
+}
 #battlefield-header {
 	justify-content: space-between;
+	border: 2px solid gold;
+	background-color: black;
+	color: white;
+	border-radius: 15px;
+	margin: 5px;
+}
+
+.battlefield-header > h4 {
+	margin: 20px;
 }
 
 .flex-grow {
@@ -69,10 +102,20 @@
 }
 
 .game-wrapper {
-	background-color: rgb(109, 99, 99);
+	/* 	background-color: rgb(109, 99, 99);
+ */
 	width: 100%;
 }
-
+.player-hand {
+	background-color: black;
+	margin-top: 5px;
+	padding-top: 10px;
+	margin-bottom: 5px;
+	padding-bottom: 25px;
+	border-top: 3px solid gold;
+	border-bottom: 3px solid gold;
+	border-radius: 30px;
+}
 .player-wrapper {
 	display: flex;
 	flex-direction: row;
@@ -141,7 +184,9 @@
 }
 
 .battlefield-player-wrapper {
-	border: 2px solid blueviolet;
+	border: 2px solid gold;
+	background-color: black;
+	color: white;
 	border-radius: 15px;
 	flex: 1;
 	margin: 5px;
