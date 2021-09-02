@@ -3,8 +3,13 @@ import './Card.css';
 
 export default function CreatureCard(props) {
 	const [big, setBig] = useState(false);
+	const [tapped, setTapped] = useState(props.tapped || false);
+
 	return (
-		<div className='playing-card creature-card'>
+		<div
+			className='playing-card creature-card'
+			style={tapped ? { transform: 'rotate(90deg)' } : null}
+		>
 			<h6>
 				{props.card.creatureName || props.card.name} {'  '}
 				<span style={{ fontStyle: 'italic', fontWeight: '300' }}>
@@ -56,14 +61,24 @@ export default function CreatureCard(props) {
 			)}
 			{!props.deckCreator ? (
 				props.summoned ? (
-					<button className='utility-button' onClick={() => props.attack()}>
+					<button
+						className='utility-button'
+						onClick={() => {
+							if (tapped) {
+								console.log('creature already tapped');
+								return;
+							}
+							props.attack();
+							setTapped(true);
+						}}
+					>
 						Attack
 					</button>
 				) : (
 					<button
 						className='utility-button'
 						onClick={() => {
-							props.summonCreature(props.card, props.id);
+							!tapped && props.summonCreature(props.card, props.id);
 						}}
 					>
 						Summon

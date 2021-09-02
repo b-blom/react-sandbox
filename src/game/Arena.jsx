@@ -4,8 +4,6 @@ import Player1Hand from './cards/renderComponents/Player1Hand';
 import Player2Hand from './cards/renderComponents/Player2Hand';
 import ManaCard from './cards/ManaCard';
 import CreatureCard from './cards/CreatureCardV2';
-import logo from './../logo.svg';
-import nasa from '../nasa-1.jpg';
 
 export default function Arena() {
 	const {
@@ -54,11 +52,6 @@ export default function Arena() {
 
 	return (
 		<div className='arena game-wrapper  image-background'>
-			{/* 	<img
-				src={nasa}
-				alt='react logo'
-				style={{ zIndex: '1', opacity: '50%' }}
-			/> */}
 			<h2>arena</h2>
 			<button
 				className='arena-button'
@@ -82,6 +75,7 @@ export default function Arena() {
 						{activePlayer === 'player1' && (
 							<button
 								className='arena-button'
+								style={{ width: '75%', height: '40px' }}
 								onClick={() => {
 									setHidePlayer1(!hidePlayer1);
 								}}
@@ -94,7 +88,9 @@ export default function Arena() {
 							style={
 								activePlayer === 'player1' && !hidePlayer1
 									? null
-									: { display: 'none' }
+									: {
+											opacity: '0%',
+									  }
 							}
 						>
 							<Player1Hand player='player1' opponent='player2' />
@@ -146,6 +142,7 @@ export default function Arena() {
 																card={card}
 																key={index}
 																summoned={true}
+																tapped={false}
 																attack={() =>
 																	dealDamage('player1', card.strength)
 																}
@@ -200,6 +197,7 @@ export default function Arena() {
 						{activePlayer === 'player2' && (
 							<button
 								className='arena-button'
+								style={{ width: '75%', height: '40px' }}
 								onClick={() => {
 									setHidePlayer2(!hidePlayer2);
 								}}
@@ -212,7 +210,7 @@ export default function Arena() {
 							style={
 								activePlayer === 'player2' && !hidePlayer2
 									? null
-									: { display: 'none' }
+									: { opacity: '0%' }
 							}
 						>
 							<Player2Hand />
