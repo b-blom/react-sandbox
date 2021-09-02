@@ -13,12 +13,6 @@
 	border: 2px solid silver;
 }
 
-.nav-bar {
-	height: 55px;
-	background-color: black;
-	color: white;
-}
-
 .image-background {
 	background-image: url('../nasa-1.jpg');
 	background-size: cover;

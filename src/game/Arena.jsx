@@ -36,6 +36,10 @@ export default function Arena() {
 	const [hidePlayer1, setHidePlayer1] = useState(false);
 	const [hidePlayer2, setHidePlayer2] = useState(false);
 
+	const [backgroundColor, setBackgroundColor] = useState(() =>
+		Math.floor(Math.random() * 16777215).toString(16)
+	);
+
 	const dealDamage = (player, damage) => {
 		console.log('p2hp', player2Hp);
 		if (player === 'player1') {
@@ -51,7 +55,18 @@ export default function Arena() {
 	};
 
 	return (
-		<div className='arena game-wrapper  image-background'>
+		<div
+			className='arena game-wrapper  image-background'
+			style={{ background: `#${backgroundColor}` }}
+		>
+			<button
+				style={{ height: '30px' }}
+				onClick={() => {
+					setBackgroundColor(Math.floor(Math.random() * 16777215).toString(16));
+				}}
+			>
+				new background color
+			</button>
 			<h2>arena</h2>
 			<button
 				className='arena-button'
