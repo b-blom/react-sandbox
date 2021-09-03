@@ -187,3 +187,8 @@
 	flex: 1;
 	margin: 5px;
 }
+
+.card-creator-wrapper {
+	margin: 10px;
+	background-color: rgba(0, 128, 128, 0.329);
+}

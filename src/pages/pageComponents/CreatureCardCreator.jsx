@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
-import CreatureCard from '../../game/cards/CreatureCard';
+import CreatureCard from '../../game/cards/CreatureCardV2';
 
 const CREATURE_CARD_QUERY = gql`
 	{

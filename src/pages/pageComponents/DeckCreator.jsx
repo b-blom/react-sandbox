@@ -91,7 +91,6 @@ export default function DeckCreator() {
 							data.manaCards.map((card, index) => {
 								return (
 									<div key={index} className='select-card-wrapper'>
-										<ManaCard card={card} />
 										<button
 											onClick={() => {
 												addToDeck(card);
@@ -99,6 +98,7 @@ export default function DeckCreator() {
 										>
 											select card
 										</button>
+										<ManaCard card={card} />
 									</div>
 								);
 							})}
@@ -111,7 +111,6 @@ export default function DeckCreator() {
 							data.creatureCards.map((card, index) => {
 								return (
 									<div>
-										<CreatureCard card={card} key={index} deckCreator={true} />
 										<button
 											onClick={() => {
 												addToDeck(card);
@@ -119,6 +118,7 @@ export default function DeckCreator() {
 										>
 											Select card
 										</button>
+										<CreatureCard card={card} key={index} deckCreator={true} />
 									</div>
 								);
 							})}
@@ -131,7 +131,6 @@ export default function DeckCreator() {
 							data.instantCards.map((card, index) => {
 								return (
 									<div className='select-card-wrapper' key={index}>
-										<CreatureCard card={card} deckCreator={true} />
 										<button
 											onClick={() => {
 												addToDeck(card);
@@ -139,14 +138,12 @@ export default function DeckCreator() {
 										>
 											Select card
 										</button>
+										<CreatureCard card={card} deckCreator={true} />
 									</div>
 								);
 							})}
 					</div>
 				</div>
-				{/* 			{player1Deck.map((card, index) => {
-					return <p key={index}> {card.name}</p>;
-				})} */}
 			</div>
 		</div>
 	);
