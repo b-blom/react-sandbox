@@ -8,6 +8,7 @@ import { DeckContext } from './context/DeckContext';
 
 export default function GameRouter() {
 	const [activePlayer, setActivePlayer] = useState('player1');
+	const [actionMessage, setActionMessage] = useState('actionMessage');
 
 	const [player1Hp, setPlayer1Hp] = useState(20);
 	const [player1Deck, setPlayer1Deck] = useState([]);
@@ -31,6 +32,8 @@ export default function GameRouter() {
 			value={{
 				activePlayer,
 				setActivePlayer,
+				actionMessage,
+				setActionMessage,
 
 				player1Hp,
 				setPlayer1Hp,

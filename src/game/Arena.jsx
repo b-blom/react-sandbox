@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { DeckContext } from '../context/DeckContext';
+import ActionMessage from '../game/gameComponents/ActionMessage';
 import Player1Hand from './cards/renderComponents/Player1Hand';
 import Player2Hand from './cards/renderComponents/Player2Hand';
 import ManaCard from './cards/ManaCard';
@@ -9,6 +10,8 @@ export default function Arena() {
 	const {
 		activePlayer,
 		setActivePlayer,
+		actionMessage,
+		setActionMessage,
 
 		player1Hp,
 		setPlayer1Hp,
@@ -121,7 +124,9 @@ export default function Arena() {
 								<h4>
 									p1 hp: <span style={{ fontSize: '20px' }}>{player1Hp}</span>
 								</h4>
-								<h2>battlefield</h2>{' '}
+								<div className='col'>
+									<h2>battlefield</h2> <ActionMessage />
+								</div>
 								{/* TODO: add or replace with actionMessage */}
 								<h4>
 									<span style={{ fontSize: '20px' }}>{player2Hp}</span> :p2 hp
@@ -151,9 +156,7 @@ export default function Arena() {
 													})}
 												</div>
 												<div className='row flex-wrap'>
-													{/* TODO: creatures does not deal damage to the other player */}
 													{player1BattlefieldCreatures.map((card, index) => {
-														//	console.log(card);
 														return (
 															<CreatureCard
 																card={card}
@@ -162,7 +165,9 @@ export default function Arena() {
 																tapped={false}
 																attack={() => {
 																	dealDamage('player1', card.strength);
-																	//					console.log('tap correct amount of mana');
+																	setActionMessage(
+																		`${card.name} dealt ${card.strength} damage to player 2`
+																	);
 																}}
 															/>
 														);
@@ -174,7 +179,7 @@ export default function Arena() {
 									<div className='battlefield-player-wrapper'>
 										<h3>player 2 side</h3>
 										<div className='col'>
-											{/* Refactor height constraint to something better */}
+											{/* //TODO: Refactor height constraint to something better */}
 											<div className='row-reverse'>
 												<div className='col'>
 													{player2BattlefieldMana.map((card, index) => {
@@ -197,9 +202,12 @@ export default function Arena() {
 																card={card}
 																key={index}
 																summoned={true}
-																attack={() =>
-																	dealDamage('player2', card.strength)
-																}
+																attack={() => {
+																	dealDamage('player2', card.strength);
+																	setActionMessage(
+																		`dealt ${card.strength} damage to player 1`
+																	);
+																}}
 															/>
 														);
 													})}

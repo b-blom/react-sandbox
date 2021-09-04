@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { DeckContext } from '../../context/DeckContext';
 
-export default function CurrentAction(props) {
+export default function CurrentAction() {
+	const { actionMessage, setActionMessage } = useContext(DeckContext);
 	return (
-		<div className='board-element action-board'>
-			{props.message && (
-				<p>
-					<strong>{props.message}</strong>
-				</p>
+		<div>
+			<p>
+				<strong>{actionMessage}</strong>
+			</p>
+
+			{actionMessage.length > 0 && (
+				<button className='arena-button' onClick={() => setActionMessage('')}>
+					clear
+				</button>
 			)}
-			<button onClick={props.clear}>clear</button>
 		</div>
 	);
 }

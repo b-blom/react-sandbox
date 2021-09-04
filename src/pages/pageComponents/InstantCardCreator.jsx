@@ -121,8 +121,6 @@ export default function InstantCardCreator() {
 						value={cardDefense}
 						onChange={(e) => setCardDefense(e.target.value)}
 					/>
-
-					{/* TODO: add card damage to input form and in database */}
 					<button
 						onClick={() => {
 							createInstantCard({
