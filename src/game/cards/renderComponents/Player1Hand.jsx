@@ -100,14 +100,7 @@ export default function Player1Hand(props) {
 
 											if (card.type === 'instant') {
 												const battlefieldMana = [...player1BattlefieldMana];
-												let untappedMana = [];
-												battlefieldMana.forEach((card, index) => {
-													if (card.tapped === false) {
-														untappedMana.push({ card: card, key: index });
-													}
-												});
 
-												let instantCost = card.cost;
 												let manaIndexToTap = [];
 
 												// find all untapped mana
@@ -116,21 +109,17 @@ export default function Player1Hand(props) {
 												});
 
 												// check if we have enough mana
-												if (manaIndexToTap.length < instantCost) {
+												if (manaIndexToTap.length < card.cost) {
 													alert('not enough mana');
 													return;
 												}
 
 												// tap the required mana cards
 
-												for (var i = 0; i < instantCost; i++) {
+												for (var i = 0; i < card.cost; i++) {
 													const manaCardToTap = manaIndexToTap[i];
 													battlefieldMana[manaCardToTap].tapped = true;
 												}
-
-												/* 		manaIndexToTap.forEach((targetManaCard) => {
-														battlefieldMana[targetManaCard].tapped = true;
-													}); */
 
 												// deal damage
 												if (card.damage > 0) {
@@ -147,13 +136,7 @@ export default function Player1Hand(props) {
 
 													// if instant is strength add strength to creature
 
-													// tap mana cards
-
-													/* 		let newBattlefieldMana = [...player1BattlefieldMana];
-
-													for (let i = 0; i < card.cost; i++) {
-														newBattlefieldMana[i].tapped = true;
-													} */
+													// tap mana card
 
 													// remove card from player hand
 													let newPlayerHand = [...player1Hand];
@@ -165,7 +148,7 @@ export default function Player1Hand(props) {
 											}
 										}}
 									>
-										{card.type === 'instant' ? `🎆: ${card.cost}` : 'summon'}
+										{card.type === 'instant' ? `cast: ${card.cost}` : 'summon'}
 									</button>
 								</td>
 							</tr>
