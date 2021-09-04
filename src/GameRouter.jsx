@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Game from './game/Game';
 import Home from './game/Home';
 import ContentCreator from './pages/ContentCreator';
 import DeckCreator from './pages/pageComponents/DeckCreator';
@@ -208,9 +207,6 @@ export default function GameRouter() {
 						<li>
 							<Link to='/arena'>Arena</Link>
 						</li>
-						<li>
-							<Link to='/game'>Play field</Link>
-						</li>
 					</ul>
 				</div>
 				<Switch>
@@ -222,9 +218,6 @@ export default function GameRouter() {
 					</Route>
 					<Route path='/createdeck'>
 						<DeckCreator />
-					</Route>
-					<Route path='/game'>
-						<Game />
 					</Route>
 					<Route path='/arena'>
 						<Arena />

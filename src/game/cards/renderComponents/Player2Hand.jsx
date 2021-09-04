@@ -98,6 +98,29 @@ export default function Player2Hand(props) {
 											}
 
 											if (card.type === 'instant') {
+												const battlefieldMana = [...player2BattlefieldMana];
+
+												let manaIndexToTap = [];
+
+												// find all untapped mana
+												battlefieldMana.forEach((card, index) => {
+													if (!card.tapped) manaIndexToTap.push(index);
+												});
+
+												// check if we have enough mana
+												if (manaIndexToTap.length < card.cost) {
+													alert('not enough mana');
+													return;
+												}
+
+												// tap the required mana cards
+
+												for (var i = 0; i < card.cost; i++) {
+													const manaCardToTap = manaIndexToTap[i];
+													battlefieldMana[manaCardToTap].tapped = true;
+												}
+
+												// deal damage
 												if (card.damage > 0) {
 													const player = 'player2';
 													if (player === 'player2') {
@@ -116,7 +139,7 @@ export default function Player2Hand(props) {
 											}
 										}}
 									>
-										summon
+										{card.type === 'instant' ? `cast: ${card.cost}` : 'summon'}
 									</button>
 								</td>
 							</tr>

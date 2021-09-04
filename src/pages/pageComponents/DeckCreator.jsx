@@ -42,8 +42,6 @@ export default function DeckCreator() {
 
 	const [editPlayer2Deck, setEditPlayer2Deck] = useState(false);
 
-	// TODO: create player 2 dech and add cards to player 2 deck
-
 	const { data, loading, error } = useQuery(CARDS_QUERY);
 
 	const addToDeck = (card) => {
@@ -63,25 +61,27 @@ export default function DeckCreator() {
 	if (error) return <h2>ERROR</h2>;
 	return (
 		<div className='row'>
-			<button
-				onClick={() => {
-					setEditPlayer2Deck(!editPlayer2Deck);
-				}}
-			>
-				toggle p1/p2 deck
-			</button>
+			<div className='col'>
+				<button
+					onClick={() => {
+						setEditPlayer2Deck(!editPlayer2Deck);
+					}}
+				>
+					toggle p1/p2 deck
+				</button>
 
-			{editPlayer2Deck ? (
-				<div className='col black-border'>
-					<h4> Player 2 deck</h4>
-					<RenderDeck2 deckCreator={true} />
-				</div>
-			) : (
-				<div className='col black-border'>
-					<h4> Player 1 deck</h4>
-					<RenderDeck deckCreator={true} />
-				</div>
-			)}
+				{editPlayer2Deck ? (
+					<div className='col black-border'>
+						<h4> Player 2 deck</h4>
+						<RenderDeck2 deckCreator={true} />
+					</div>
+				) : (
+					<div className='col black-border'>
+						<h4> Player 1 deck</h4>
+						<RenderDeck deckCreator={true} />
+					</div>
+				)}
+			</div>
 			<div className='col'>
 				<div className='black-border'>
 					<h4>Mana cards</h4>

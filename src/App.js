@@ -1,4 +1,5 @@
 import './App.css';
+import './game/Game.css';
 import './game/gameComponents/Action.css';
 import GameRouter from './GameRouter';
 

@@ -72,7 +72,6 @@ export default function Player1Hand(props) {
 								<td style={{ textAlign: 'end' }}>{card.name}</td>
 								<td>{card.image}</td>
 								<td>{card.type}</td>
-
 								<td>
 									<button
 										onClick={() => {
