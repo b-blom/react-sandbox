@@ -161,12 +161,8 @@ export default function Arena() {
 																summoned={true}
 																tapped={false}
 																attack={() => {
-																	if (
-																		player1BattlefieldMana.length >= card.cost
-																	) {
-																		dealDamage('player1', card.strength);
-																		//					console.log('tap correct amount of mana');
-																	}
+																	dealDamage('player1', card.strength);
+																	//					console.log('tap correct amount of mana');
 																}}
 															/>
 														);
