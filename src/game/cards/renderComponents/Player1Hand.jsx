@@ -62,7 +62,6 @@ export default function Player1Hand(props) {
 						<th>name</th>
 						<th>image</th>
 						<th>type</th>
-						<th>cost</th>
 						<th>summon</th>
 					</tr>
 				</thead>
@@ -73,7 +72,7 @@ export default function Player1Hand(props) {
 								<td style={{ textAlign: 'end' }}>{card.name}</td>
 								<td>{card.image}</td>
 								<td>{card.type}</td>
-								<td>{card.cost}</td>
+
 								<td>
 									<button
 										onClick={() => {
@@ -101,7 +100,6 @@ export default function Player1Hand(props) {
 
 											if (card.type === 'instant') {
 												const battlefieldMana = [...player1BattlefieldMana];
-												console.log('battlefieldmana', battlefieldMana);
 												let untappedMana = [];
 												battlefieldMana.forEach((card, index) => {
 													if (card.tapped === false) {
@@ -109,32 +107,53 @@ export default function Player1Hand(props) {
 													}
 												});
 
-												console.log('untappedMana', untappedMana);
+												let instantCost = card.cost;
+												let manaIndexToTap = [];
 
-												if (untappedMana.length >= card.cost) {
-													if (card.damage > 0) {
-														const player = 'player1';
-														if (player === 'player1') {
-															let newHp = player2Hp;
-															newHp = newHp - card.damage;
-															setPlayer2Hp(newHp);
-														}
+												// find all untapped mana
+												battlefieldMana.forEach((card, index) => {
+													if (!card.tapped) manaIndexToTap.push(index);
+												});
+
+												// check if we have enough mana
+												if (manaIndexToTap.length < instantCost) {
+													alert('not enough mana');
+													return;
+												}
+
+												// tap the required mana cards
+
+												for (var i = 0; i < instantCost; i++) {
+													const manaCardToTap = manaIndexToTap[i];
+													battlefieldMana[manaCardToTap].tapped = true;
+												}
+
+												/* 		manaIndexToTap.forEach((targetManaCard) => {
+														battlefieldMana[targetManaCard].tapped = true;
+													}); */
+
+												// deal damage
+												if (card.damage > 0) {
+													const player = 'player1';
+													if (player === 'player1') {
+														let newHp = player2Hp;
+														newHp = newHp - card.damage;
+														setPlayer2Hp(newHp);
 													}
+
+													// if instant is hp + add hp to player
+
+													// if instant is defense add defense to creature
+
+													// if instant is strength add strength to creature
 
 													// tap mana cards
 
-													console.log('manaCArds', player1BattlefieldMana);
-
-													let newBattlefieldMana = [...player1BattlefieldMana];
-													console.log('nmbf array', newBattlefieldMana);
-													console.log('nmbf', newBattlefieldMana[0]);
+													/* 		let newBattlefieldMana = [...player1BattlefieldMana];
 
 													for (let i = 0; i < card.cost; i++) {
-														console.log(i);
 														newBattlefieldMana[i].tapped = true;
-
-														//console.log('nmbf', newBattlefieldMana[i]);
-													}
+													} */
 
 													// remove card from player hand
 													let newPlayerHand = [...player1Hand];

@@ -152,15 +152,21 @@ export default function Arena() {
 												</div>
 												<div className='row flex-wrap'>
 													{player1BattlefieldCreatures.map((card, index) => {
+														//	console.log(card);
 														return (
 															<CreatureCard
 																card={card}
 																key={index}
 																summoned={true}
 																tapped={false}
-																attack={() =>
-																	dealDamage('player1', card.strength)
-																}
+																attack={() => {
+																	if (
+																		player1BattlefieldMana.length >= card.cost
+																	) {
+																		dealDamage('player1', card.strength);
+																		//					console.log('tap correct amount of mana');
+																	}
+																}}
 															/>
 														);
 													})}

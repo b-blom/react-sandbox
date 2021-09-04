@@ -72,6 +72,8 @@ export default function GameRouter() {
 						}}
 					>
 						{/* TODO: create a playable dummy deck */}
+						{/* TODO: add tapped field to cards in database?
+						 */}
 						<button
 							onClick={() => {
 								const dummyDeck = [
@@ -80,48 +82,28 @@ export default function GameRouter() {
 										image: '🔥',
 										name: 'Fire',
 										type: 'mana',
+										tapped: false,
 									},
 									{
 										__typename: 'ManaCard',
 										image: '🧊',
 										name: 'Ice',
 										type: 'mana',
+										tapped: false,
 									},
 									{
 										__typename: 'ManaCard',
 										image: '🌍',
 										name: 'Earth',
 										type: 'mana',
+										tapped: false,
 									},
 									{
 										__typename: 'ManaCard',
 										image: '🌌',
 										name: 'Space',
 										type: 'mana',
-									},
-									{
-										__typename: 'CreatureCard',
-										ability: 'poop',
-										abilityCost: 1,
-										abilityDescription:
-											'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
-										defense: 1,
-										image: '🐦',
-										name: 'bird',
-										strength: 1,
-										type: 'creature',
-									},
-									{
-										__typename: 'CreatureCard',
-										ability: 'poop',
-										abilityCost: 1,
-										abilityDescription:
-											'poop on opponent. opponent must go clean up and cannot do any other actions this turn',
-										defense: 1,
-										image: '🐦',
-										name: 'bird',
-										strength: 1,
-										type: 'creature',
+										tapped: false,
 									},
 									{
 										__typename: 'CreatureCard',
@@ -165,6 +147,46 @@ export default function GameRouter() {
 										description: '3 damage to anything',
 										image: '⚡',
 										name: 'bolt',
+										type: 'instant',
+									},
+									{
+										__typename: 'InstantCard',
+										cost: 1,
+										damage: 3,
+										defense: 0,
+										description: '3 damage to anything',
+										image: '⚡',
+										name: 'bolt',
+										type: 'instant',
+									},
+									{
+										__typename: 'InstantCard',
+										cost: 3,
+										damage: 9,
+										defense: 0,
+										description: '9 damage to anything',
+										image: '🌠',
+										name: 'falling star',
+										type: 'instant',
+									},
+									{
+										__typename: 'InstantCard',
+										cost: 3,
+										damage: 9,
+										defense: 0,
+										description: '9 damage to anything',
+										image: '🌠',
+										name: 'falling star',
+										type: 'instant',
+									},
+									{
+										__typename: 'InstantCard',
+										cost: 3,
+										damage: 9,
+										defense: 0,
+										description: '9 damage to anything',
+										image: '🌠',
+										name: 'falling star',
 										type: 'instant',
 									},
 								];
