@@ -98,6 +98,7 @@ export default function Player1Hand(props) {
 												setPlayer1Hand(newPlayerHand);
 											}
 
+											/* TODO: add this functionallity to player 2 hand */
 											if (card.type === 'instant') {
 												const battlefieldMana = [...player1BattlefieldMana];
 

@@ -151,6 +151,7 @@ export default function Arena() {
 													})}
 												</div>
 												<div className='row flex-wrap'>
+													{/* TODO: creatures does not deal damage to the other player */}
 													{player1BattlefieldCreatures.map((card, index) => {
 														//	console.log(card);
 														return (
