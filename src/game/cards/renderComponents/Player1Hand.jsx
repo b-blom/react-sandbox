@@ -62,6 +62,7 @@ export default function Player1Hand(props) {
 						<th>name</th>
 						<th>image</th>
 						<th>type</th>
+						<th>cost</th>
 						<th>summon</th>
 					</tr>
 				</thead>
@@ -72,6 +73,7 @@ export default function Player1Hand(props) {
 								<td style={{ textAlign: 'end' }}>{card.name}</td>
 								<td>{card.image}</td>
 								<td>{card.type}</td>
+								<td>{card.cost}</td>
 								<td>
 									<button
 										onClick={() => {
@@ -98,25 +100,53 @@ export default function Player1Hand(props) {
 											}
 
 											if (card.type === 'instant') {
-												if (card.damage > 0) {
-													const player = 'player1';
-													if (player === 'player1') {
-														let newHp = player2Hp;
-														newHp = newHp - card.damage;
-														setPlayer2Hp(newHp);
+												const battlefieldMana = [...player1BattlefieldMana];
+												console.log('battlefieldmana', battlefieldMana);
+												let untappedMana = [];
+												battlefieldMana.forEach((card, index) => {
+													if (card.tapped === false) {
+														untappedMana.push({ card: card, key: index });
 													}
-												}
-												// instants are never summoned to battlefield,
-												// so we will handle instant effect here
+												});
 
-												// remove card from player hand
-												let newPlayerHand = [...player1Hand];
-												newPlayerHand.splice(index, 1);
-												setPlayer1Hand(newPlayerHand);
+												console.log('untappedMana', untappedMana);
+
+												if (untappedMana.length >= card.cost) {
+													if (card.damage > 0) {
+														const player = 'player1';
+														if (player === 'player1') {
+															let newHp = player2Hp;
+															newHp = newHp - card.damage;
+															setPlayer2Hp(newHp);
+														}
+													}
+
+													// tap mana cards
+
+													console.log('manaCArds', player1BattlefieldMana);
+
+													let newBattlefieldMana = [...player1BattlefieldMana];
+													console.log('nmbf array', newBattlefieldMana);
+													console.log('nmbf', newBattlefieldMana[0]);
+
+													for (let i = 0; i < card.cost; i++) {
+														console.log(i);
+														newBattlefieldMana[i].tapped = true;
+
+														//console.log('nmbf', newBattlefieldMana[i]);
+													}
+
+													// remove card from player hand
+													let newPlayerHand = [...player1Hand];
+													newPlayerHand.splice(index, 1);
+													setPlayer1Hand(newPlayerHand);
+												} else {
+													alert('not enough mana');
+												}
 											}
 										}}
 									>
-										summon
+										{card.type === 'instant' ? `🎆: ${card.cost}` : 'summon'}
 									</button>
 								</td>
 							</tr>
