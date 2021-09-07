@@ -6,7 +6,7 @@ import DeckCreator from './pages/pageComponents/DeckCreator';
 import Arena from './game/Arena';
 import { DeckContext } from './context/DeckContext';
 
-export default function GameRouter() {
+export default function GameRouter(props) {
 	const [activePlayer, setActivePlayer] = useState('player1');
 	const [actionMessage, setActionMessage] = useState('actionMessage');
 
@@ -209,6 +209,12 @@ export default function GameRouter() {
 						</li>
 						<li>
 							<Link to='/arena'>Arena</Link>
+						</li>
+						<li>
+							<button className='arena-button' onClick={() => props.logout()}>
+								{' '}
+								log out{' '}
+							</button>
 						</li>
 					</ul>
 				</div>
