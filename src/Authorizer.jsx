@@ -10,12 +10,13 @@ export default function Authorizer() {
     <div>
       {loggedIn ? (
         <div>
+          <p>hello {loggedIn}</p>
           <button onClick={() => setLoggedIn(false)}>log out</button>
-          {loggedIn && 'name placeholder'}
-          <GameRouter logout={() => setLoggedIn(false)} />
+
+          <GameRouter logout={() => setLoggedIn(false)} playerName={loggedIn} />
         </div>
       ) : (
-        <Login login={() => setLoggedIn(true)} />
+        <Login login={(playerName) => setLoggedIn(playerName)} />
       )}
     </div>
   );
