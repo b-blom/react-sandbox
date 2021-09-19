@@ -26,6 +26,7 @@ export default function Arena() {
     setPlayer1BattlefieldCreatures,
 
     player2Hp,
+    player2Name,
     setPlayer2Hp,
     player2Deck,
     setPlayer2Deck,
@@ -107,7 +108,11 @@ export default function Arena() {
                       opacity: '0%',
                     }
               }>
-              <Player1Hand player='player1' opponent='player2' />
+              <Player1Hand
+                playerName={player1Name}
+                player='player1'
+                opponent='player2'
+              />
             </div>
           </div>
           <div className=' col flex-stretch flex-grow battlefield-background'>
@@ -232,7 +237,11 @@ export default function Arena() {
                   ? null
                   : { opacity: '0%' }
               }>
-              <Player2Hand />
+              <Player2Hand
+                playerName={player2Name}
+                player='player1'
+                opponent='player2'
+              />
             </div>
           </div>
         </div>
