@@ -22,22 +22,24 @@ export default function Authorizer() {
 
   return (
     <div>
-      {loggedIn ? (
+      {/* uncomment for login functionallity with custom names */}
+      {/*   {loggedIn ? (
         <div>
           <p>
             {player1Name} vs {player2Name}
           </p>
           <button onClick={() => handleLogout()}>log out</button>
-
-          <GameRouter
-            logout={() => setLoggedIn(false)}
-            player1Name={player1Name}
-            player2Name={player2Name}
-          />
+ */}
+      <GameRouter
+        logout={() => setLoggedIn(false)}
+        player1Name={player1Name}
+        player2Name={player2Name}
+      />
+      {/*     
         </div>
       ) : (
         <Login login={(p1Name, p2Name) => handleLogin(p1Name, p2Name)} />
-      )}
+      )} */}
     </div>
   );
 }

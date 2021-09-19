@@ -39,7 +39,9 @@ export default function Player2Hand(props) {
   }
   return (
     <div className='player-hand'>
-      <h2 className='margin-t-b-2'>{props.playerName}</h2>
+      <h2 className='margin-t-b-2'>
+        {props.playerName || 'p1 name placeholder'}
+      </h2>
       <h3 className='margin-t-b-2'>
         Deck size: {JSON.stringify(player2Deck.length)}
       </h3>

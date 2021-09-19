@@ -45,17 +45,33 @@ export default function Arena() {
     Math.floor(Math.random() * 16777215).toString(16)
   );
 
-  const dealDamage = (player, damage) => {
+  const [attackStack, setAttackStack] = useState([]);
+
+  const addToAttackStack = (castingPlayer, card, cardId) => {
+    let newAttackStack = [...attackStack];
+    newAttackStack.push({ castingPlayer, card, cardId });
+    setAttackStack(newAttackStack);
+    console.log(attackStack);
+  };
+  const dealDamage = (player, damage, card) => {
+    // refactor to use card.damage instead of damage.
     console.log('p2hp', player2Hp);
+    console.log(card);
     if (player === 'player1') {
       let newHp = player2Hp;
       newHp = newHp - damage;
       setPlayer2Hp(newHp);
+      setActionMessage(
+        `${card.name} dealt ${card.strength} damage to player 2`
+      );
     }
     if (player === 'player2') {
       let newHp = player1Hp;
       newHp = newHp - damage;
       setPlayer1Hp(newHp);
+      setActionMessage(
+        `${card.name} dealt ${card.strength} damage to player 1`
+      );
     }
   };
 
@@ -132,6 +148,32 @@ export default function Arena() {
                   <span style={{ fontSize: '20px' }}>{player2Hp}</span> :p2 hp
                 </h4>
               </div>
+              {attackStack.length > 0 && (
+                <div className='col'>
+                  <h3>Attack stack</h3>
+                  {attackStack.map((attack) => {
+                    return (
+                      <p>
+                        {attack.card.name}, {attack.card.strength}
+                      </p>
+                    );
+                  })}
+
+                  <button
+                    onClick={() => {
+                      attackStack.map((attack) => {
+                        dealDamage(
+                          attack.castingPlayer,
+                          attack.card.strength,
+                          attack.card
+                        );
+                      });
+                      setAttackStack([]);
+                    }}>
+                    launch attack
+                  </button>
+                </div>
+              )}
               {player1Hp <= 0 && <h1>PLAYER 2 wins</h1>}
               {player2Hp <= 0 && <h1>PLAYER 1 wins</h1>}
               {player1Hp > 0 && player2Hp > 0 && (
@@ -164,10 +206,8 @@ export default function Arena() {
                                 summoned={true}
                                 tapped={false}
                                 attack={() => {
-                                  dealDamage('player1', card.strength);
-                                  setActionMessage(
-                                    `${card.name} dealt ${card.strength} damage to player 2`
-                                  );
+                                  addToAttackStack('player1', card, index);
+                                  //dealDamage('player1', card.strength);
                                 }}
                               />
                             );
