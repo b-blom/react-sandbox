@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { DeckContext } from '../context/DeckContext';
 import ActionMessage from '../game/gameComponents/ActionMessage';
+import PlayerHud from './gameComponents/PlayerHud';
 import Player1Hand from './cards/renderComponents/Player1Hand';
 import Player2Hand from './cards/renderComponents/Player2Hand';
 import ManaCard from './cards/ManaCard';
@@ -17,7 +18,9 @@ export default function Arena() {
     player1Name,
     setPlayer1Hp,
     player1Deck,
+    player1Hand,
     setPlayer1Deck,
+    setPlayer1Hand,
     player1BattlefieldMana,
     player1BattlefieldInstant,
     setPlayer1BattlefieldInstant,
@@ -29,6 +32,7 @@ export default function Arena() {
     player2Name,
     setPlayer2Hp,
     player2Deck,
+    player2Hand,
     setPlayer2Deck,
     player2BattlefieldMana,
     player2BattlefieldInstant,
@@ -46,6 +50,79 @@ export default function Arena() {
   );
 
   const [attackStack, setAttackStack] = useState([]);
+
+  const clickOnCardInHand = (card, index) => {
+    console.log(card);
+    if (card.type === 'mana') {
+      console.log('mana');
+      let newBattleFieldMana = [...player1BattlefieldMana];
+      newBattleFieldMana.push(card);
+      setPlayer1BattlefieldMana(newBattleFieldMana);
+
+      let newPlayerHand = [...player1Hand];
+      newPlayerHand.splice(index, 1);
+      setPlayer1Hand(newPlayerHand);
+    }
+
+    if (card.type === 'creature') {
+      let newBattlefieldCreatures = [...player1BattlefieldCreatures];
+      newBattlefieldCreatures.push(card);
+      setPlayer1BattlefieldCreatures(newBattlefieldCreatures);
+
+      let newPlayerHand = [...player1Hand];
+      newPlayerHand.splice(index, 1);
+      setPlayer1Hand(newPlayerHand);
+    }
+
+    if (card.type === 'instant') {
+      const battlefieldMana = [...player1BattlefieldMana];
+
+      let manaIndexToTap = [];
+
+      // find all untapped mana
+      battlefieldMana.forEach((card, index) => {
+        if (!card.tapped) manaIndexToTap.push(index);
+      });
+
+      // check if we have enough mana
+      if (manaIndexToTap.length < card.cost) {
+        alert('not enough mana');
+        return;
+      }
+
+      // tap the required mana cards
+
+      for (var i = 0; i < card.cost; i++) {
+        const manaCardToTap = manaIndexToTap[i];
+        battlefieldMana[manaCardToTap].tapped = true;
+      }
+
+      // deal damage
+      if (card.damage > 0) {
+        const player = 'player1';
+        if (player === 'player1') {
+          let newHp = player2Hp;
+          newHp = newHp - card.damage;
+          setPlayer2Hp(newHp);
+        }
+
+        // if instant is hp + add hp to player
+
+        // if instant is defense add defense to creature
+
+        // if instant is strength add strength to creature
+
+        // tap mana card
+
+        // remove card from player hand
+        let newPlayerHand = [...player1Hand];
+        newPlayerHand.splice(index, 1);
+        setPlayer1Hand(newPlayerHand);
+      } else {
+        alert('not enough mana');
+      }
+    }
+  };
 
   const addToAttackStack = (castingPlayer, card, cardId) => {
     let newAttackStack = [...attackStack];
@@ -124,11 +201,22 @@ export default function Arena() {
                       opacity: '0%',
                     }
               }>
-              <Player1Hand
+              {' '}
+              <PlayerHud
                 playerName={player1Name}
+                playerDeck={player1Deck}
+                playerHand={player1Hand}
+                clickOnHandCard={(card, index) =>
+                  clickOnCardInHand(card, index)
+                }
                 player='player1'
                 opponent='player2'
               />
+              {/*   <Player1Hand
+                playerName={player1Name}
+                player='player1'
+                opponent='player2'
+              /> */}
             </div>
           </div>
           <div className=' col flex-stretch flex-grow battlefield-background'>
@@ -277,11 +365,21 @@ export default function Arena() {
                   ? null
                   : { opacity: '0%' }
               }>
-              <Player2Hand
+              <PlayerHud
+                playerName={player2Name || 'dos'}
+                playerDeck={player2Deck}
+                playerHand={player2Hand}
+                clickOnHandCard={(card, index) =>
+                  clickOnCardInHand(card, index)
+                }
+                player='player2'
+                opponent='player1'
+              />
+              {/* <Player2Hand
                 playerName={player2Name}
                 player='player1'
                 opponent='player2'
-              />
+              /> */}
             </div>
           </div>
         </div>

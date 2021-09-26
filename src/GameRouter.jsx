@@ -5,6 +5,7 @@ import ContentCreator from './pages/ContentCreator';
 import DeckCreator from './pages/pageComponents/DeckCreator';
 import Arena from './game/Arena';
 import { DeckContext } from './context/DeckContext';
+import ArenaTester from './pages/ArenaTester';
 
 export default function GameRouter(props) {
   const [activePlayer, setActivePlayer] = useState('player1');
@@ -83,24 +84,24 @@ export default function GameRouter(props) {
                 const dummyDeckLocal = [
                   {
                     __typename: 'ManaCard',
-                    image: '🎉',
-                    name: 'Standard Mana',
-                    type: 'standard',
-                    cardGuid: 'f09b36d6-a181-43ac-a6cf-ebbe6e8b227e',
+                    image: '🌌',
+                    name: 'Space',
+                    type: 'mana',
+                    cardGuid: '680a5a6e-526e-4cf4-ade9-235a17287222',
                   },
                   {
                     __typename: 'ManaCard',
                     image: '🔥',
-                    name: 'Fire Mana',
-                    type: 'fire',
-                    cardGuid: '6c416833-ecd0-46c1-9c13-9baa916970a2',
+                    name: 'Fire',
+                    type: 'mana',
+                    cardGuid: '95d0f25b-c65e-4523-a79b-3b5cb433eff3',
                   },
                   {
                     __typename: 'ManaCard',
-                    image: '🧊',
-                    name: 'Ice Mana',
-                    type: 'ice',
-                    cardGuid: 'fa0138dc-d46e-4383-a371-0d93635b6677',
+                    image: '🍰',
+                    name: 'Cake',
+                    type: 'mana',
+                    cardGuid: '3ca8eb3c-0609-4171-babf-718acf04a429',
                   },
                   {
                     __typename: 'ManaCard',
@@ -296,6 +297,9 @@ export default function GameRouter(props) {
               <Link to='/arena'>Arena</Link>
             </li>
             <li>
+              <Link to='/arenav2'>ArenaV2</Link>
+            </li>
+            <li>
               <button className='arena-button' onClick={() => props.logout()}>
                 log out
               </button>
@@ -314,6 +318,9 @@ export default function GameRouter(props) {
           </Route>
           <Route path='/arena'>
             <Arena />
+          </Route>
+          <Route path='/arenav2'>
+            <ArenaTester />
           </Route>
         </Switch>
       </Router>
