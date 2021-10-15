@@ -1,0 +1,21 @@
+.hud {
+  margin: 2em auto;
+  border: 2px dotted teal;
+  text-align: center;
+}
+
+.field {
+  width: 300px;
+  height: 300px;
+  border: 2px dotted black;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 50px;
+  margin: 50px auto;
+}
+
+.tile {
+  border: 20px solid gray;
+}

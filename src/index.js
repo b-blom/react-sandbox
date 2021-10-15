@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import PTG from './App';
+import TicTacToe from './TicTacToe/TicTacToe';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
@@ -13,7 +14,8 @@ const client = new ApolloClient({
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <TicTacToe />
+      {/*  <PTG /> */}
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
