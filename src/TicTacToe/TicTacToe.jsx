@@ -3,6 +3,8 @@ import './tttstyles.css';
 
 export default function TicTacToe() {
   const [p1, setP1] = useState('player-1');
+  const [player1Score, setPlayer1Score] = useState(0);
+  const [player2Score, setPlayer2Score] = useState(0);
   const [gameWinner, setGameWinner] = useState(null);
 
   const clicked = (id) => {
@@ -29,10 +31,12 @@ export default function TicTacToe() {
     const doWeHaveAwinner = checkWinner();
     if (doWeHaveAwinner.includes('player-1')) {
       console.log('P1 WINS');
+      setPlayer1Score(player1Score + 1);
       setGameWinner('player-1');
     }
     if (doWeHaveAwinner.includes('player-2')) {
       setGameWinner('player-2');
+      setPlayer2Score(player2Score + 1);
       console.log('P2 WINS');
     }
   };
@@ -234,8 +238,21 @@ export default function TicTacToe() {
   return (
     <div>
       <h2>TicTacToe</h2>
-      <div className='hud'>winner: {gameWinner}</div>
+      <div className='hud'>
+        <aside className='p1-score'>player 1: {player1Score}</aside>
+        <div className='winner-display'>winner: {gameWinner}</div>
+        <aside className='p1-score'>player 2: {player2Score}</aside>
+      </div>
       <button onClick={() => newGame()}>new game</button>
+      <h2
+        className='active-player'
+        style={
+          p1 === 'player-1'
+            ? { backgroundColor: `green` }
+            : { backgroundColor: `red` }
+        }>
+        Active player: {p1}
+      </h2>
       <div className='field' id='field'>
         <div className='tile' id='1-1' onClick={() => clicked('1-1')}></div>
         <div className='tile' id='1-2' onClick={() => clicked('1-2')}></div>
